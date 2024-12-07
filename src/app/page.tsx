@@ -1,101 +1,82 @@
-import Image from "next/image";
+import { AppLayout, JobPosting } from '@/components'
+import { JobPostingProps } from '@/components/Feed/JobPosting/JobPosting.types'
+
+const jobs: JobPostingProps[] = [
+  {
+    date: new Date('2023-12-01'),
+    description:
+      'Installation of solar panels on a residential rooftop, including mounting, wiring, and inverter setup.',
+    skills: [
+      'Solar Panel Installation',
+      'Electrical Wiring',
+      'Safety Protocols'
+    ],
+    title: 'Residential Solar Installation',
+    user: {
+      name: 'Avery Johnson'
+    }
+  },
+  {
+    date: new Date('2024-01-15'),
+    description:
+      'Repair and maintenance of industrial HVAC systems, ensuring optimal performance and energy efficiency.',
+    skills: ['HVAC Maintenance', 'Troubleshooting', 'Mechanical Repair'],
+    title: 'Industrial HVAC Maintenance',
+    user: {
+      name: 'Taylor Smith'
+    }
+  },
+  {
+    date: new Date('2024-02-10'),
+    description:
+      'Design and installation of a modern kitchen lighting system, including recessed and under-cabinet lighting.',
+    skills: ['Lighting Design', 'Electrical Planning', 'Fixture Installation'],
+    title: 'Modern Kitchen Lighting',
+    user: {
+      name: 'Morgan Lee'
+    }
+  },
+  {
+    date: new Date('2024-03-05'),
+    description:
+      'Upgrading an office building to a smart energy management system, integrating IoT devices and software solutions.',
+    skills: [
+      'Smart System Integration',
+      'IoT Device Setup',
+      'Energy Efficiency Solutions'
+    ],
+    title: 'Smart Office Energy Upgrade',
+    user: {
+      name: 'Charlie Davis'
+    }
+  },
+  {
+    date: new Date('2024-03-20'),
+    description:
+      'Inspection and certification of electrical systems for a commercial building to meet local safety regulations.',
+    skills: [
+      'Electrical Inspection',
+      'Code Compliance',
+      'Documentation & Reporting'
+    ],
+    title: 'Commercial Electrical Inspection',
+    user: {
+      name: 'Alex Kim'
+    }
+  }
+]
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <AppLayout>
+      <div className="m-auto max-w-md">
+        <h1 className="mb-5">Home</h1>
+        <div className="space-y-4">
+          {jobs.map((job, index) => (
+            <JobPosting {...job} key={index} />
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </div>
+    </AppLayout>
+  )
 }

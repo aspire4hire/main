@@ -6,21 +6,50 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^1.1.2",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-radio-group": "^1.2.1",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-switch": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.1.4",
+    "@supabase/supabase-js": "^2.47.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.468.0",
+    "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@chromatic-com/storybook": "^3.2.2",
+    "@storybook/addon-essentials": "^8.5.0-alpha.18",
+    "@storybook/addon-interactions": "^8.5.0-alpha.18",
+    "@storybook/addon-onboarding": "^8.5.0-alpha.18",
+    "@storybook/blocks": "^8.5.0-alpha.18",
+    "@storybook/nextjs": "^8.5.0-alpha.18",
+    "@storybook/react": "^8.5.0-alpha.18",
+    "@storybook/test": "^8.5.0-alpha.18",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "15.0.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-storybook": "^0.11.1",
     "postcss": "^8",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "storybook": "^8.5.0-alpha.18",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "typescript": "^5"
   }
 }

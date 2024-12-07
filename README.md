@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Aspire4Hire**
 
-## Getting Started
+---
 
-First, run the development server:
+## 🚀 **Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** Next.js 15
+- **Styling:** Tailwind CSS
+- **Component Documentation:** Storybook configured for easy visualization and
+  testing of components.
+- **Package Manager:** npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ **Prerequisites**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ensure you have the following installed:
 
-## Learn More
+- **Node.js** (Recommended minimum version: 16.x).
+- **npm**, included with Node.js.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ **Installation & Setup**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone this repository to your local machine:
 
-## Deploy on Vercel
+   ```bash
+   git clone <repository-url>
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Navigate to the project directory:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   cd aspire4hire
+   ```
+
+3. Install the dependencies using npm:
+
+   ```bash
+   npm install --force
+   ```
+
+4. Once installation is complete, you can run the project in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will start the Next.js development server at `http://localhost:3000`.
+
+---
+
+## 📚 **Running Storybook**
+
+Storybook has been configured to allow you to view and test components in
+isolation.
+
+1. To start Storybook, run:
+
+   ```bash
+   npm run storybook
+   ```
+
+2. Once Storybook is running, you can view it in your browser at
+   `http://localhost:6006`.
+
+---
+
+## 📝 **Project Structure**
+
+- **`src/`**: Contains all the route files for your application.
+- **`components/`**: Stores reusable UI components.
+- **`storybook/`**: Storybook configuration and stories.
+
+---
+
+## 💡 **Additional Notes**
+
+- If you run into issues with dependencies, try deleting the `node_modules`
+  folder and running `npm install` again.
+- Make sure to check the browser's developer console for any potential warnings
+  or errors during development.
