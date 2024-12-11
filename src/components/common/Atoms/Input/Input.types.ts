@@ -2,7 +2,7 @@ import { ComponentProps } from 'react'
 
 interface InputProps extends ComponentProps<'input'> {
   label?: string
-  hasError?: boolean
+  error?: string
 }
 
 export type { InputProps }
