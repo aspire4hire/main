@@ -9,6 +9,6 @@ export type SelectorProps = React.ComponentPropsWithoutRef<
     label: string | React.ReactNode
   }[]
   placeholder?: string
-  hasError?: boolean
+  error?: string
   label?: string
 }

@@ -21,6 +21,7 @@ html {
     --primary-foreground: 0 0% 98%;
     --secondary: 43 100% 51%;
     --secondary-foreground: 200 94.52% 14.31%;
+    --tertiary: 200 17% 49%;
     --muted: 43 100% 51%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 43 100% 51%;
@@ -75,5 +76,35 @@ html {
 
   p {
     @apply text-sm;
+  }
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  ::-webkit-scrollbar-horizontal {
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-vertical {
+    width: 8px;
   }
 }

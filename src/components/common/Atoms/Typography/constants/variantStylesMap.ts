@@ -7,7 +7,7 @@ const variantStylesMap: Record<TypographyVariant, string> = {
   h4: 'text-2xl mb-2',
   h5: 'text-xl mb-1',
   h6: 'text-lg mb-1',
-  p: 'text-base',
+  p: 'text-[14px]',
   span: 'text-sm',
   ['body1']: 'text-base !text-[#6b7280]',
   ['body2']: 'text-sm !text-[#6b7280]'

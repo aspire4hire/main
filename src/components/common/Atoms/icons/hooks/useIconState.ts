@@ -26,6 +26,8 @@ const useIconState = ({
     return ''
   }, [bgColor])
 
+  console.log('SIZE--', size)
+
   const className = useMemo(
     () =>
       clsx(ICON_SIZE[size], 'shrink-0', currentClassName, {
