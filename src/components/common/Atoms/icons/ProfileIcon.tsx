@@ -5,7 +5,6 @@ import { useIconState } from './hooks'
 import { IconProps } from './types'
 
 export const ProfileIcon = (props: IconProps) => {
-  console.log('🚀 ~ ProfileIcon ~ props:', props)
   const { iconProps } = useIconState(props)
   return (
     <svg width={20} height={20} viewBox="0 0 20 20" fill="none" {...iconProps}>

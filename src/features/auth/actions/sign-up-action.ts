@@ -11,24 +11,12 @@ export async function signUpAndLogin(singUpDto: SignUpLoginDto) {
       email: singUpDto.email,
       password: singUpDto.password
     })
-  console.log('🚀 ~ signUpAndLogin ~ signUpError:', signUpError)
 
   if (signUpError) {
     throw new Error(signUpError.message)
   }
 
-  //   const { data: loginData, error: loginError } =
-  //     await supabaseServer.auth.signInWithPassword({
-  //       email: singUpDto.email,
-  //       password: singUpDto.password
-  //     })
-
-  //   if (loginError) {
-  //     throw new Error(loginError.message)
-  //   }
-
   return {
     signUpData
-    // loginData
   }
 }
