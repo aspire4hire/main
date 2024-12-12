@@ -47,3 +47,20 @@ export interface Credential {
   credential_name: string
   credential_description: string | null
 }
+
+export interface Profile {
+  user_id: string
+  created_at: string
+  email_address: string
+  first_name: string | null
+  middle_name: string | null
+  last_name: string | null
+  date_of_birth: string | null
+  city_name: string | null
+  province_id: string | null
+  bio: string | null
+  resume_url: string | null
+  is_employer: boolean
+  profile_pic: string
+  is_profile_complete: boolean
+}
