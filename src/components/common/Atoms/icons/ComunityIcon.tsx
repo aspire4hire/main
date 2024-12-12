@@ -5,6 +5,7 @@ import { useIconState } from './hooks'
 import { IconProps } from './types'
 
 export const ComunityIcon = (props: IconProps) => {
+  console.log('🚀 ~ ComunityIcon ~ props:', props)
   const { iconProps } = useIconState(props)
   return (
     <svg

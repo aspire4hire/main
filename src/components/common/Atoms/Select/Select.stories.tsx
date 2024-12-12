@@ -38,7 +38,7 @@ WithError.args = {
   name,
   placeholder: 'Select an option',
   label: 'Selector with Error',
-  hasError: true
+  error: 'This field is required'
 }
 
 export const PreSelected = Template.bind({})

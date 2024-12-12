@@ -2,7 +2,10 @@
 enum AvatarSizeEnum {
   XS = 'xs',
   MD = 'md',
-  LG = 'lg'
+  LG = 'lg',
+  XL = 'xl',
+  '2XL' = '2xl',
+  CUSTOM = 'custom'
 }
 
 export { AvatarSizeEnum }

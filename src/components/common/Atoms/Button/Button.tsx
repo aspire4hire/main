@@ -18,25 +18,50 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       asChild = false,
       fullWidth = false,
+      isFileUpload = false,
+      onFileChange,
+      onClick,
+      accept,
       ...props
     },
     ref
   ) => {
+    const fileInputRef = React.useRef<HTMLInputElement>(null)
+
+    const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (isFileUpload && fileInputRef.current) {
+        fileInputRef.current.click()
+      } else if (onClick) {
+        onClick(e)
+      }
+    }
     const Comp = asChild ? Slot : 'button'
     return (
-      <Comp
-        className={cn(
-          buttonVariants({ variant, size, className }),
-          rounded && 'rounded-full',
-          fullWidth && 'w-full'
+      <>
+        <Comp
+          className={cn(
+            buttonVariants({ variant, size, className }),
+            rounded && 'rounded-full',
+            fullWidth && 'w-full'
+          )}
+          ref={ref}
+          disabled={isLoading || disabled}
+          onClick={handleButtonClick}
+          {...props}
+        >
+          {isLoading && <Loader2 className="animate-spin" />}
+          {children}
+        </Comp>
+        {isFileUpload && (
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={onFileChange}
+            accept={accept}
+          />
         )}
-        ref={ref}
-        disabled={isLoading || disabled}
-        {...props}
-      >
-        {isLoading && <Loader2 className="animate-spin" />}
-        {children}
-      </Comp>
+      </>
     )
   }
 )

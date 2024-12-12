@@ -15,6 +15,7 @@ export enum IconSizeEnum {
 
 interface IconProps extends HTMLAttributes<SVGElement> {
   size?: IconSizeEnum
+  iconSize?: IconSizeEnum
   className?: HTMLElement['className']
   disabled?: boolean
   iconColor?: string

@@ -7,6 +7,8 @@ import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import clsx from 'clsx'
 import { SelectorProps } from './Select.types'
+import { Label } from '../Label'
+import { ErrorField } from '../ErrorField'
 
 const Select = SelectPrimitive.Root
 
@@ -157,27 +159,19 @@ const Selector = React.forwardRef<
       name,
       onValueChange,
       options,
-      placeholder = 'Select an element',
-      hasError,
+      placeholder = 'Select an option',
+      error,
       label,
       ...props
     },
     // eslint-disable-next-line no-unused-vars
     ref
   ) => (
-    <div className="group relative">
+    <div className="w-full">
       {label && (
-        <label
-          htmlFor={name}
-          className={cn(
-            'absolute start-1 top-0 z-10 block -translate-y-1/2 bg-background px-2 text-xs font-medium text-muted-foreground peer-focus:text-foreground group-has-[:disabled]:opacity-50',
-            hasError && 'text-destructive'
-          )}
-        >
-          {label}
-        </label>
+        <Label className="text-tertiary font-semibold">{`${label} ${props.required ? '*' : ''}`}</Label>
       )}
-      <SelectPrimitive.Root
+      <Select
         value={value}
         name={name}
         onValueChange={onValueChange}
@@ -185,12 +179,16 @@ const Selector = React.forwardRef<
       >
         <SelectTrigger
           className={clsx(
-            'w-full',
-            hasError && 'border-destructive',
+            'h-auto w-full py-[10px]',
+            error && 'border-destructive',
             !value && 'text-muted-foreground'
           )}
         >
-          <SelectValue placeholder={placeholder} />
+          <SelectValue
+            placeholder={placeholder}
+            // className={value ? '!text-primary' : 'text-muted-foreground'}
+            className="!text-primary"
+          />
         </SelectTrigger>
         <SelectContent>
           {options.map((option, index) => (
@@ -199,7 +197,8 @@ const Selector = React.forwardRef<
             </SelectItem>
           ))}
         </SelectContent>
-      </SelectPrimitive.Root>
+      </Select>
+      {error && <ErrorField error={error} />}
     </div>
   )
 )
