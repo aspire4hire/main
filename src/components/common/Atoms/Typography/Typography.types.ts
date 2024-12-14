@@ -11,6 +11,7 @@ export type TypographyVariant =
   | 'span'
   | 'body1'
   | 'body2'
+  | 'semiTitle'
 
 export type TypographyProps = {
   variant?: TypographyVariant

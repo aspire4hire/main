@@ -3,6 +3,6 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off",
-    "no-unused-vars": "error" // Cambiar "warn" por "error" si deseas que sea más estricto
-  }
+    "no-unused-vars": ["warn", { "args": "none" }]
+}
 }

@@ -10,7 +10,8 @@ const variantStylesMap: Record<TypographyVariant, string> = {
   p: 'text-[14px]',
   span: 'text-sm',
   ['body1']: 'text-base !text-[#6b7280]',
-  ['body2']: 'text-sm !text-[#6b7280]'
+  ['body2']: 'text-sm !text-[#6b7280]',
+  ['semiTitle']: 'md:text-base text-sm font-bold'
 }
 
 export { variantStylesMap }

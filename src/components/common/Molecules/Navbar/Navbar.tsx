@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import { NavbarProps } from './types'
 import { NavItem } from './components'

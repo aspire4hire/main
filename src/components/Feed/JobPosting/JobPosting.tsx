@@ -13,7 +13,7 @@ export const JobPosting: React.FC<JobPostingProps> = ({
   user
 }) => {
   return (
-    <article className="w-full space-y-3 p-3">
+    <article className="w-full space-y-3 py-3">
       <div className="grid grid-cols-3">
         <div className="col-span-2 pr-3">
           <Typography variant="span" className="font-semibold text-primary/60">

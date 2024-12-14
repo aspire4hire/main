@@ -12,7 +12,7 @@ const meta: Meta<typeof Input> = {
     type: {
       control: { type: 'text' }
     },
-    hasError: {
+    error: {
       control: { type: 'boolean' }
     },
     className: {
@@ -36,7 +36,7 @@ WithError.args = {
   label: 'Input label',
   placeholder: 'This is placeholder',
   type: 'text',
-  hasError: true
+  error: 'has error'
 }
 
 export const WithoutLabel = Template.bind({})

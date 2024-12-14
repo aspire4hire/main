@@ -26,6 +26,9 @@ import { ProfileIcon } from './ProfileIcon'
 import { IconSizeEnum } from './types'
 import { Tooltip } from '../Tooltip'
 import { CompanyIcon } from './CompanyIcon'
+import { CheckCircleIcon } from './CheckCircleIcon'
+import { SettingsIcon } from './SettingsIcon'
+import { HummerIcon } from './HummerIcon'
 
 export default {
   title: 'Icons',
@@ -56,7 +59,10 @@ const IconTemplate: StoryFn = args => {
     ResourcesIcon,
     MessageIcon,
     ProfileIcon,
-    CompanyIcon
+    CompanyIcon,
+    CheckCircleIcon,
+    SettingsIcon,
+    HummerIcon
   ]
 
   return (

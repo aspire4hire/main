@@ -10,18 +10,22 @@ export const EditIcon = (props: IconProps) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={16}
-      height={15}
-      viewBox="0 0 16 15"
+      height={16}
       fill="none"
+      viewBox="0 0 16 16"
       {...iconProps}
     >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-        d="m10.059 2.746 2.47 2.411M8.412 14H15M1.824 10.784 1 14l3.294-.804 9.542-9.314c.308-.301.482-.71.482-1.136 0-.427-.174-.835-.482-1.137l-.142-.138A1.668 1.668 0 0 0 12.529 1c-.436 0-.855.17-1.164.47l-9.541 9.315Z"
-      />
+      <g clipPath="url(#a)">
+        <path
+          fill="currentColor"
+          d="M0 16v-3.778L11.733.512c.178-.164.375-.29.59-.379C12.538.044 12.763 0 13 0c.236 0 .466.044.689.133.223.09.415.223.578.4l1.222 1.245c.178.163.307.355.39.578a1.903 1.903 0 0 1 0 1.344c-.082.216-.212.412-.39.589L3.778 16H0ZM12.978 4.267l1.244-1.245-1.244-1.244-1.245 1.244 1.245 1.245Z"
+        />
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path fill="#fff" d="M0 0h16v16H0z" />
+        </clipPath>
+      </defs>
     </svg>
   )
 }

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React from 'react'
@@ -170,7 +168,7 @@ export const BasicInformationStep = () => {
                   }))}
                   placeholder="Choose an option..."
                   {...field}
-                  value={field.value}
+                  value={field.value as any}
                   onValueChange={field.onChange}
                   error={getFormError(errors, field.name)}
                 />
