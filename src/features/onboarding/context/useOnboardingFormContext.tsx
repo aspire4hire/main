@@ -1,22 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import {
   OnboardingFormDto,
   Province,
   SkillTrade,
   StepPositionEnum,
-  Credential
+  Credential,
+  Profile
 } from '../types'
 
 type IOnboardingFormContext = {
-  handleSubmit: () => void
+  handleSubmit: (data: OnboardingFormDto) => void
   form: UseFormReturn<OnboardingFormDto>
   handleChangeStep: (step: StepPositionEnum) => void
   stepPosition: StepPositionEnum
   skillTrades: SkillTrade[]
   provinces: Province[]
   credentials: Credential[]
+  isEditing: boolean
 }
 
 const OnboardingFormContext = createContext<IOnboardingFormContext>(undefined!)
@@ -26,16 +34,20 @@ const OnboardingFormProvider = ({
   children,
   skillTrades,
   provinces,
-  credentials
+  credentials,
+  isEditing,
+  data
 }: {
   children: ReactNode
-  onSubmit: () => void
+  onSubmit: (data: OnboardingFormDto) => void
   skillTrades: SkillTrade[]
   provinces: Province[]
   credentials: Credential[]
+  isEditing: boolean
+  data?: Profile | null
 }) => {
   const [stepPosition, setStepPosition] = useState<StepPositionEnum>(
-    StepPositionEnum.USER_TYPE
+    isEditing ? StepPositionEnum.BASIC_INFORMATION : StepPositionEnum.USER_TYPE
   )
 
   const handleChangeStep = (step: StepPositionEnum) => {
@@ -51,8 +63,21 @@ const OnboardingFormProvider = ({
     }
   })
 
-  const handleSubmit = () => {
-    onSubmit()
+  useEffect(() => {
+    if (data) {
+      onboardingForm.reset({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        bio: data.bio || undefined,
+        city_name: data.city_name,
+        province_id: data.province_id,
+        is_employer: data.is_employer
+      })
+    }
+  }, [data])
+
+  const handleSubmit = (data: OnboardingFormDto) => {
+    onSubmit(data)
   }
 
   const state: IOnboardingFormContext = {
@@ -62,7 +87,8 @@ const OnboardingFormProvider = ({
     stepPosition,
     skillTrades,
     provinces,
-    credentials
+    credentials,
+    isEditing
   }
 
   return (

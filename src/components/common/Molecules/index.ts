@@ -1,3 +1,6 @@
 export * from './Navbar'
 export * from './TextEditor'
 export * from './PageTransition'
+export * from './TextEditorPreview'
+export * from './PageLoader'
+export * from './SettingsButton'

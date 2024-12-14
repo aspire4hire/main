@@ -2,7 +2,7 @@
 export interface TextEditorProps {
   placeholder?: string
   onChange?: (value: string) => void
-  value?: string
+  value?: string | null
   onChangeAsPlainText?: (value: string) => void
   isEditable?: boolean
   error?: string

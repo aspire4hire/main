@@ -7,9 +7,7 @@ import { ROUTES } from '@/constants'
 import { Typography } from '@/components'
 import Image from 'next/image'
 
-type Props = {
-  searchParams: { [key: string]: string | undefined }
-}
+type Props = any
 
 const SignUpPage = async ({ searchParams }: Props) => {
   const supabase = await createServerClient()

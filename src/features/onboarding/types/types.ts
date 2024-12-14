@@ -10,9 +10,9 @@ export interface OnboardingFormDto {
   last_name: string
   profile_pic: File | string
   city_name: string
-  province_id: string
+  province_id: number
   is_employer: boolean
-  bio?: string
+  bio?: string | null
 
   // JobSeeker FIELDS
   skilled_trades: number[]
@@ -52,15 +52,15 @@ export interface Profile {
   user_id: string
   created_at: string
   email_address: string
-  first_name: string | null
+  first_name: string
   middle_name: string | null
-  last_name: string | null
+  last_name: string
   date_of_birth: string | null
-  city_name: string | null
-  province_id: string | null
+  city_name: string
+  province_id: number
   bio: string | null
   resume_url: string | null
   is_employer: boolean
-  profile_pic: string
+  profile_pic: string | null
   is_profile_complete: boolean
 }

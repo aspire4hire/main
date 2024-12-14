@@ -23,7 +23,7 @@ export const NavItem = ({
             size={size}
             className={cn(isActive ? 'text-primary' : 'text-muted-foreground')}
           />
-          {isActive && <div className={cn('h-[2px] w-4', 'bg-primary')} />}
+          {isActive && <div className={cn('h-[2px] w-4', 'bg-secondary')} />}
         </div>
         <Typography
           variant="span"

@@ -12,7 +12,8 @@ import { CompanyInformation } from './CompanyInformation'
 export const DetailedInformationStep = () => {
   const {
     handleChangeStep,
-    form: { handleSubmit, watch }
+    form: { handleSubmit, watch },
+    handleSubmit: onSubmit
   } = useOnboardingFormContext()
 
   const isEmployer = watch('is_employer')
@@ -45,11 +46,7 @@ export const DetailedInformationStep = () => {
           {isEmployer ? <CompanyInformation /> : <JobSeekerDetailedInfo />}
         </div>
       </PageTransition>
-      <StepperButton
-        onClick={handleSubmit(() =>
-          handleChangeStep(StepPositionEnum.DETAILED_INFORMATION)
-        )}
-      >
+      <StepperButton onClick={handleSubmit(onSubmit)}>
         <CheckIcon size={IconSizeEnum.XS} />
         {StepperInformation.submitText}
       </StepperButton>
