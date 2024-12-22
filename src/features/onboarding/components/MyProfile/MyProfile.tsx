@@ -1,36 +1,44 @@
 'use client'
 
 import {
-  AttachIcon,
   Avatar,
   AvatarSizeEnum,
   Button,
-  CheckCircleIcon,
+  CompanyIcon,
   EditIcon,
   IconSizeEnum,
-  JobPosting,
   Skeleton,
   SkillTrade,
-  TextEditorPreview,
   Typography
 } from '@/components'
 import React from 'react'
-import { useCredentials, useProvinces, useSkillTrades } from '../../hooks'
+import { useProvinces } from '../../hooks'
 import { Profile } from '../../types'
-import { JOBS_DUMMY } from '@/constants/dump-data'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
+import { CompanyProfileDetails, JobSekeerProfileDetails } from './components'
+import { Company } from '@/features/company'
 
 type MyProfileProps = {
   profile: Profile
 }
 
 export const MyProfile = ({ profile }: MyProfileProps) => {
-  const { data } = useSkillTrades()
-  const { data: credentials } = useCredentials()
+  console.log({
+    profile
+  })
   const { data: provinces, isLoading } = useProvinces()
 
   const router = useRouter()
+
+  const onEdit = (company: Company) =>
+    router.push(ROUTES.EDIT_COMPANY({ id: company.id }))
+
+  const onView = (company: Company) =>
+    router.push(ROUTES.EDIT_COMPANY({ id: company.id }))
+
+  const onDelete = (company: Company) =>
+    router.push(ROUTES.EDIT_COMPANY({ id: company.id }))
 
   return (
     <>
@@ -50,15 +58,26 @@ export const MyProfile = ({ profile }: MyProfileProps) => {
             }
           </Typography>
         )}
-        <div className="my-4 flex flex-wrap justify-center gap-x-5 gap-y-3">
-          {data.map(skillTrade => (
-            <SkillTrade
-              key={skillTrade.id}
-              icon={skillTrade.trade_icon}
-              name={skillTrade.trade_name}
-            />
-          ))}
-        </div>
+        {profile.is_employer ? (
+          <div className="my-4 flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-tertiary/20">
+              <CompanyIcon className="!h-5 !w-5 text-primary" />
+            </div>
+
+            <Typography className="text-base font-bold">Employer</Typography>
+          </div>
+        ) : (
+          <div className="my-4 flex flex-wrap justify-center gap-x-5 gap-y-3">
+            {profile.skilled_trades.map(skillTrade => (
+              <SkillTrade
+                key={skillTrade.id}
+                icon={skillTrade.trade_icon}
+                name={skillTrade.trade_name}
+              />
+            ))}
+          </div>
+        )}
+
         <Button
           variant={'primaryWithSecondary'}
           rounded
@@ -70,41 +89,21 @@ export const MyProfile = ({ profile }: MyProfileProps) => {
         </Button>
       </div>
       <div className="mb-8 mt-3 h-[2px] w-full bg-primary"></div>
-      <TextEditorPreview
-        title="Bio"
-        content={profile.bio ?? '<p className="text-tertiary">No bio yet</p>'}
-      />
-      <Button
-        variant={'outline'}
-        rounded
-        className="mt-2 flex items-center gap-2"
-      >
-        <AttachIcon size={IconSizeEnum.MD} className="!text-primary" />
-        View Resume
-      </Button>
-      <Typography className="mb-2 mt-6" variant="semiTitle">
-        Credentials Checklist
-      </Typography>
-      <div className="mb-5 flex flex-wrap gap-x-5 gap-y-3">
-        {credentials.map(credential => (
-          <div key={credential.id} className="flex items-center gap-1">
-            <CheckCircleIcon className="text-primary" size={IconSizeEnum.XS} />
-            <Typography variant="p" className="text-xs md:text-sm">
-              {credential.credential_name}
-            </Typography>
-          </div>
-        ))}
-      </div>
-      <Typography className="mb-2 mt-6" variant="semiTitle">
-        Video Portfolio
-      </Typography>
-      <div className="flex flex-col">
-        <div className="space-y-4">
-          {JOBS_DUMMY.map((job, index) => (
-            <JobPosting {...job} key={index} />
-          ))}
+      {profile.is_employer ? (
+        <div>
+          <Typography variant="semiTitle" className="mb-3">
+            My Companies
+          </Typography>
+          <CompanyProfileDetails
+            companies={profile.companies || []}
+            onEdit={onEdit}
+            onView={onView}
+            onDelete={onDelete}
+          />
         </div>
-      </div>
+      ) : (
+        <JobSekeerProfileDetails profile={profile} />
+      )}
     </>
   )
 }

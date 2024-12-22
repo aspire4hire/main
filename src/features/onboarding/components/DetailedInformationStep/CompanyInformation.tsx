@@ -7,6 +7,8 @@ import React from 'react'
 import { useOnboardingFormContext } from '../../context'
 import {
   AttachIcon,
+  Avatar,
+  AvatarSizeEnum,
   Button,
   IconSizeEnum,
   Input,
@@ -16,7 +18,7 @@ import {
 } from '@/components'
 import { Controller } from 'react-hook-form'
 import { cleanHtml, getFormError, getPreviewUrl } from '@/utils'
-import { Trash } from 'lucide-react'
+import { Trash, XIcon } from 'lucide-react'
 import { isValidURL } from '@/utils/is-valid-url'
 
 export const CompanyInformation = () => {
@@ -97,6 +99,7 @@ export const CompanyInformation = () => {
             </Typography>
             <Input
               {...field}
+              value={field.value ?? undefined}
               label="Company Website URL"
               placeholder="Type company address here..."
               error={getFormError(errors, field.name)}
@@ -124,30 +127,34 @@ export const CompanyInformation = () => {
               </Typography>
             </div>
             {field.value ? (
-              <div className="flex w-full flex-col items-center justify-center gap-2">
-                <img
+              <div className="mb-2 flex w-fit items-center gap-16 rounded-md bg-tertiary/10 p-2">
+                <Avatar
                   src={getPreviewUrl(field.value)}
-                  className="h-32 w-full max-w-full object-contain"
+                  size={AvatarSizeEnum.CUSTOM}
+                  className="h-20 w-20 object-cover"
                 />
-                <Button size={'icon'} onClick={() => field.onChange(null)}>
-                  <Trash />
+                <Button
+                  size={'icon'}
+                  variant={'ghost'}
+                  onClick={() => field.onChange(null)}
+                >
+                  <XIcon />
                 </Button>
               </div>
-            ) : (
-              <Button
-                rounded
-                isFileUpload
-                accept="image/*"
-                onFileChange={event =>
-                  handleChangeProfilePic(event, field.onChange)
-                }
-              >
-                <AttachIcon size={IconSizeEnum.SM} />
-                <Typography className="text-secondary" variant="span">
-                  Upload Picture
-                </Typography>
-              </Button>
-            )}
+            ) : null}
+            <Button
+              rounded
+              isFileUpload
+              accept="image/*"
+              onFileChange={event =>
+                handleChangeProfilePic(event, field.onChange)
+              }
+            >
+              <AttachIcon size={IconSizeEnum.SM} />
+              <Typography className="text-secondary" variant="span">
+                Upload Picture
+              </Typography>
+            </Button>
           </div>
         )}
       />

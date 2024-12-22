@@ -7,7 +7,13 @@ const ROUTES = {
   ONBOARDING: '/onboarding',
   MY_PROFILE: '/my-profile',
   EDIT_PROFILE: '/edit-profile',
-  SETTINGS: '/settings'
+  SETTINGS: '/my-profile/settings',
+  CHANGE_EMAIL: '/my-profile/settings/change-email',
+  CONFIRM_CHANGE_EMAIL: '/my-profile/settings/change-email/confirm',
+  SUCCESS_CHANGE_EMAIL: '/my-profile/settings/change-email/success',
+  CHANGE_PASSWORD: '/my-profile/settings/change-password',
+  CONFIRM_CHANGE_PASSWORD: '/my-profile/settings/change-password/success',
+  EDIT_COMPANY: ({ id }: { id: string }) => `/my-companies/${id}/edit`
 }
 
 export { ROUTES }

@@ -1,3 +1,5 @@
+import { Company } from '@/features/company'
+
 /* eslint-disable no-unused-vars */
 export enum StepPositionEnum {
   USER_TYPE = 'USER_TYPE',
@@ -5,7 +7,22 @@ export enum StepPositionEnum {
   DETAILED_INFORMATION = 'DETAILED_INFORMATION'
 }
 
-export interface OnboardingFormDto {
+export enum EditProfileTabEnum {
+  BASIC_INFORMATION = 'BASIC_INFORMATION',
+  WORK_INFORMATION = 'WORK_INFORMATION'
+}
+
+export interface OnboardingCompanyDto {
+  // Company FIELDS
+  name: string
+  description: string
+  why_work_with_us: string
+  logo_url: File | string | null
+  website_url: string | null
+  address: string
+}
+
+export interface OnboardingFormDto extends OnboardingCompanyDto {
   first_name: string
   last_name: string
   profile_pic: File | string
@@ -14,18 +31,12 @@ export interface OnboardingFormDto {
   is_employer: boolean
   bio?: string | null
 
+  is_profile_complete: boolean
+
   // JobSeeker FIELDS
   skilled_trades: number[]
   credentials: number[]
   resume_url: File | string
-
-  // Company FIELDS
-  name: string
-  description: string
-  why_work_with_us: string
-  logo_url: File | string
-  website_url: string
-  address: string
 }
 
 export interface SkillTrade {
@@ -49,7 +60,7 @@ export interface Credential {
 }
 
 export interface Profile {
-  user_id: string
+  profile_id: string
   created_at: string
   email_address: string
   first_name: string
@@ -63,4 +74,7 @@ export interface Profile {
   is_employer: boolean
   profile_pic: string | null
   is_profile_complete: boolean
+  skilled_trades: SkillTrade[]
+  credentials: Credential[]
+  companies?: Company[]
 }

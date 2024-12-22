@@ -11,5 +11,7 @@ export async function handleLogin(data: LoginDto) {
     password: data.password
   })
 
+  console.log({ response })
+
   return response
 }

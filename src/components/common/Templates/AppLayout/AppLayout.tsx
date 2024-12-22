@@ -1,36 +1,38 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import { Navbar, PageLoader } from '../../Molecules'
-import {
-  ArrowLeftIcon,
-  Button,
-  ComunityIcon,
-  HummerIcon,
-  IconSizeEnum,
-  ProfileIcon
-} from '../../Atoms'
-import { useRouter } from 'next/navigation'
+import React, { ReactNode, useEffect, useMemo, useState } from 'react'
+import { Navbar, NavigationBar, PageLoader } from '../../Molecules'
+import { CompanyIcon, ComunityIcon, HummerIcon, ProfileIcon } from '../../Atoms'
 import { cn } from '@/utils'
+import { useCurrentSessionStore } from '@/features/auth'
+import { getUserProfile } from '@/features/onboarding/actions'
+import { USER_TYPES } from '@/types'
 
 const items = [
   {
     href: '/',
     icon: { element: ComunityIcon },
     title: 'Spotlight',
-    isActive: true
+    exactlyRoute: true,
+    access: [USER_TYPES.EMPLOYER, USER_TYPES.JOBSEEKER]
   },
   {
     href: '/jobs',
     icon: { element: HummerIcon },
     title: 'Jobs',
-    isActive: false
+    access: [USER_TYPES.JOBSEEKER]
+  },
+  {
+    href: '/my-companies',
+    icon: { element: CompanyIcon },
+    title: 'Company',
+    access: [USER_TYPES.EMPLOYER]
   },
   {
     href: '/my-profile',
     icon: { element: ProfileIcon },
     title: 'Profile',
-    isActive: false
+    access: [USER_TYPES.EMPLOYER, USER_TYPES.JOBSEEKER]
   }
 ]
 
@@ -40,6 +42,7 @@ type AppLayoutProps = {
   toBack?: string
   secondNavButton?: ReactNode
   hideTopNav?: boolean
+  hideBottomBar?: boolean
 }
 
 export const AppLayout = ({
@@ -47,25 +50,50 @@ export const AppLayout = ({
   secondNavButton,
   toBack,
   backButton = true,
-  hideTopNav = false
+  hideTopNav = false,
+  hideBottomBar = false
 }: AppLayoutProps) => {
-  const router = useRouter()
+  const { profile, setCurrentSessionState } = useCurrentSessionStore()
+
+  const [isLoading, setIsLoading] = useState(!profile ? true : false)
+
+  useEffect(() => {
+    if (!profile) {
+      const getProfileInfo = async () => {
+        setIsLoading(true)
+        const profile = await getUserProfile()
+        setCurrentSessionState({ profile: profile.data })
+        setIsLoading(false)
+      }
+
+      getProfileInfo()
+    }
+  }, [setIsLoading])
+
+  const navItems = useMemo(
+    () =>
+      items.filter(item => {
+        const userType = profile?.is_employer
+          ? USER_TYPES.EMPLOYER
+          : USER_TYPES.JOBSEEKER
+        return item.access.includes(userType)
+      }),
+    [profile]
+  )
+
+  if (isLoading) {
+    return <PageLoader />
+  }
 
   return (
     <div className="flex h-[100dvh] flex-col justify-between">
       <section className="mx-auto h-full max-h-full w-full max-w-lg overflow-hidden px-3 md:px-0">
         {!hideTopNav && (
-          <div className="flex items-center justify-between bg-gradient-to-b from-white to-transparent py-2 pt-5 md:px-6">
-            {backButton && (
-              <Button
-                onClick={() => (toBack ? router.push(toBack) : router.back())}
-                size={'icon'}
-              >
-                <ArrowLeftIcon size={IconSizeEnum.SM} />
-              </Button>
-            )}
-            {secondNavButton && secondNavButton}
-          </div>
+          <NavigationBar
+            backButton={backButton}
+            toBack={toBack}
+            secondNavButton={secondNavButton}
+          />
         )}
         <div
           className={cn(
@@ -76,7 +104,7 @@ export const AppLayout = ({
           {children}
         </div>
       </section>
-      <Navbar items={items} />
+      {!hideBottomBar && <Navbar items={navItems} />}
     </div>
   )
 }

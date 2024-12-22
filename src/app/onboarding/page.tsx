@@ -1,9 +1,11 @@
 import { OnboardingForm } from '@/features/onboarding'
+import { getUserProfile } from '@/features/onboarding/actions'
 
-export default function Onboarding() {
+export default async function Onboarding() {
+  const { data } = await getUserProfile()
   return (
     <>
-      <OnboardingForm />
+      <OnboardingForm data={data} />
     </>
   )
 }

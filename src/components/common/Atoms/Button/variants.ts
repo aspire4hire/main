@@ -17,7 +17,8 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
         ghostSecondary:
           'bg-transparent border-secondary border-2 text-secondary hover:bg-secondary/5',
-        primaryWithSecondary: 'bg-primary text-secondary hover:bg-primary/90'
+        primaryWithSecondary: 'bg-primary text-secondary hover:bg-primary/90',
+        form: 'flex items-center gap-3 rounded-b-none rounded-t-3xl py-6 shadow-2xl bg-primary hover:bg-primary/90 w-full  !h-[68px] text-white font-bold'
       },
       size: {
         default: 'px-5 py-3',

@@ -40,6 +40,14 @@ export async function updateSession(request: NextRequest) {
     data: { user }
   } = await supabase.auth.getUser()
 
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  console.log({
+    session
+  })
+
   if (
     !user &&
     !request.nextUrl.pathname.startsWith(ROUTES.LOGIN) &&
@@ -62,7 +70,7 @@ export async function updateSession(request: NextRequest) {
     const { data } = await supabase
       .from('profiles')
       .select('is_profile_complete')
-      .eq('user_id', user!.id)
+      .eq('profile_id', user!.id)
       .single()
 
     if (

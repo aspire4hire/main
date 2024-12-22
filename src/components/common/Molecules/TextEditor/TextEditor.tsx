@@ -5,7 +5,7 @@ import './styles.css'
 import { EditorProvider } from '@tiptap/react'
 import Placeholder from '@tiptap/extension-placeholder'
 import StarterKit from '@tiptap/starter-kit'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MenuBar } from './MenuBar'
 import { TextEditorProps } from './TextEditor.types'
 import { cn } from '@/utils'
@@ -20,6 +20,7 @@ export const TextEditor = ({
   error,
   className
 }: TextEditorProps) => {
+  const [isLoading, setIsLoading] = useState(true)
   const extensions = [
     StarterKit.configure({
       bulletList: {
@@ -36,6 +37,14 @@ export const TextEditor = ({
       placeholder: placeholder
     })
   ]
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
+
+  if (isLoading) {
+    return <></>
+  }
 
   return (
     <EditorProvider

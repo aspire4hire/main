@@ -12,9 +12,8 @@ const useSignUpController = () => {
   const onSubmit = async (data: LoginDto) => {
     setIsLoading(true)
     const response = await signUpAndLogin(data)
-    console.log('🚀 ~ onSubmit ~ response:', { response })
 
-    if (!response.signUpData) {
+    if (!response.signUpData || response.error) {
       toast.error(
         'We are unable to process your request due to a network issue. Please check your connection and try again.',
         {
@@ -24,8 +23,10 @@ const useSignUpController = () => {
       return
     }
 
-    setIsLoading(false)
     router.push(`${ROUTES.EMAIL_VERIFICATION}?email=${data.email}`)
+
+    setIsLoading(false)
+
     return response.signUpData
   }
 
