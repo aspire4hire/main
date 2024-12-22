@@ -7,8 +7,9 @@ type NavItemProps = {
     element: React.JSXElementConstructor<IconProps>
     size?: IconSizeEnum
   }
-  isActive?: boolean
+  exactlyRoute?: boolean
   title: string
+  otherMatchRoutes?: string[]
 }
 
 type NavbarProps = {

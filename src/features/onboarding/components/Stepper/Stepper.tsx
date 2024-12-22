@@ -8,14 +8,17 @@ type StepperProps = {
   position: number
   totalSteps: number
   onBack?: () => void
+  hide?: boolean
 }
 
 export const Stepper = ({
   position,
   title,
   totalSteps,
-  onBack
+  onBack,
+  hide = false
 }: StepperProps) => {
+  if (hide) return null
   return (
     <div className="flex">
       {onBack && (

@@ -18,7 +18,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   const [hasError, setHasError] = useState(false)
   const sizeClass = size !== AvatarSizeEnum.CUSTOM ? AVATAR_SIZE[size] : ''
 
-  const className = cn('rounded-full object-cover', sizeClass, classNameProp)
+  const className = cn('rounded-full object-cover ', sizeClass, classNameProp)
 
   const iconSize = useMemo(() => {
     switch (size) {

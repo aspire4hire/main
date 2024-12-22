@@ -1,13 +1,15 @@
-import { AppLayout, SettingsButton, SettingsIcon } from '@/components'
-import { MyProfile } from '@/features/onboarding'
-import { getUserProfile } from '@/features/onboarding/actions/get-profile'
+'use client'
 
-export default async function Profile() {
-  const { data } = await getUserProfile()
+import { AppLayout, SettingsButton } from '@/components'
+import { useCurrentSessionStore } from '@/features/auth'
+import { MyProfile } from '@/features/onboarding'
+
+export default function Profile() {
+  const { profile } = useCurrentSessionStore()
 
   return (
-    <AppLayout secondNavButton={<SettingsButton />}>
-      <MyProfile profile={data} />
+    <AppLayout secondNavButton={<SettingsButton />} backButton={false}>
+      <MyProfile profile={profile!} />
     </AppLayout>
   )
 }

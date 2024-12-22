@@ -7,9 +7,20 @@ import { StepPositionEnum } from '../../types'
 import { BasicInformationStep } from '../BasicInformationStep'
 import { DetailedInformationStep } from '../DetailedInformationStep'
 import { PageTransition } from '@/components'
+import { EditProfileForm } from './EditProfileForm'
+import { EditCompanyForm } from './EditCompanyForm'
 
 export const OnboardingFormWrapper = () => {
-  const { stepPosition } = useOnboardingFormContext()
+  const { stepPosition, isEditing, isCompany } = useOnboardingFormContext()
+
+  if (isCompany && isEditing) {
+    return <EditCompanyForm />
+  }
+
+  if (isEditing) {
+    return <EditProfileForm />
+  }
+
   return (
     <>
       {stepPosition === StepPositionEnum.USER_TYPE && (

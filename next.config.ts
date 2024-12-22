@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   eslint: {
     dirs: ['src']
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '1024mb' // Set desired value here
+    }
+  },
   images: {
     loader: 'default', // Por defecto (puedes cambiar a custom si quieres más control)
     remotePatterns: [

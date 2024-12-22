@@ -8,9 +8,9 @@ import { ROUTES } from '@/constants'
 const SignUpPage = async () => {
   const supabase = await createServerClient()
 
-  const { data } = await supabase.auth.getSession()
+  const { data } = await supabase.auth.getUser()
 
-  if (data.session) {
+  if (data.user) {
     redirect(ROUTES.HOME)
   }
 

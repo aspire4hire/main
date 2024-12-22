@@ -12,9 +12,9 @@ type Props = any
 const SignUpPage = async ({ searchParams }: Props) => {
   const supabase = await createServerClient()
 
-  const { data } = await supabase.auth.getSession()
+  const { data } = await supabase.auth.getUser()
 
-  if (data.session) {
+  if (data.user) {
     redirect(ROUTES.HOME)
   }
 

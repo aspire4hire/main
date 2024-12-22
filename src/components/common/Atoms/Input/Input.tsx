@@ -8,17 +8,16 @@ import { Label } from '../Label'
 import { ErrorField } from '../ErrorField'
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', label, error, value, ...props }, ref) => {
+  (
+    { className, type = 'text', label, error, value, required, ...props },
+    ref
+  ) => {
     return (
       <div className="group">
         {label && (
           <Label className="font-semibold text-tertiary">
             {`${label}`}
-            {props.required ? (
-              <span className="ml-1 text-destructive">*</span>
-            ) : (
-              ''
-            )}
+            {required ? <span className="ml-1 text-destructive">*</span> : ''}
           </Label>
         )}
         <input

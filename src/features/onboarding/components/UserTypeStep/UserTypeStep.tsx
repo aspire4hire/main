@@ -14,7 +14,7 @@ import { StepPositionEnum } from '../../types'
 export const UserTypeStep = () => {
   const {
     form: { setValue, watch, resetField },
-    handleChangeStep
+    handleSubmit
   } = useOnboardingFormContext()
 
   const handleSelectUserType = (isEmployer: boolean) => {
@@ -31,7 +31,11 @@ export const UserTypeStep = () => {
       }
     }
     setValue('is_employer', isEmployer)
-    handleChangeStep(StepPositionEnum.BASIC_INFORMATION)
+    setTimeout(() => {
+      handleSubmit({
+        is_employer: isEmployer
+      } as any)
+    }, 0)
   }
 
   return (

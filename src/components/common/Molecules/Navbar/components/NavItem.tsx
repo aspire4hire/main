@@ -5,13 +5,21 @@ import { cn } from '@/utils'
 import Link from 'next/link'
 import React from 'react'
 import { NavItemProps } from '../types'
+import { usePathname } from 'next/navigation'
 
 export const NavItem = ({
   href,
   icon: { element: Icon, size },
   title,
-  isActive
+  exactlyRoute,
+  otherMatchRoutes
 }: NavItemProps) => {
+  const pathname = usePathname()
+  const isActive =
+    exactlyRoute && (otherMatchRoutes || []).length === 0
+      ? pathname === href
+      : pathname.startsWith(href) || otherMatchRoutes?.includes(pathname)
+
   return (
     <Link
       href={href}

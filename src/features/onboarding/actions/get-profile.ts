@@ -7,21 +7,23 @@ export async function getUserProfile(): Promise<{
   error: Error
 }> {
   const supabase = await createServerClient()
-  const { data: userSession } = await supabase.auth.getSession()
+  const { data: user } = await supabase.auth.getUser()
 
   const { data, error } = await supabase.functions.invoke(
-    `profiles-get/${userSession.session?.user.id}`,
+    `user-profiles-get/${user.user?.id}`,
     {
       method: 'GET'
     }
   )
 
+  console.log('PROFILE: ', {
+    data
+  })
+
   const profile = Array.isArray(data) ? data[0] : data
 
-  console.log('🚀 ~ getUserProfile ~ profile:', profile)
-
   if (error || !profile) {
-    throw new Error(`Error fetching data: ${error.message}`)
+    console.log(error)
   }
 
   return {
