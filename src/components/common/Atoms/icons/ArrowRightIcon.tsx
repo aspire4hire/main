@@ -19,7 +19,7 @@ export const ArrowRightIcon = (props: IconProps) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={3}
+        strokeWidth={props.stroke || 3}
         d="m2 14 8-6-8-6"
       />
     </svg>

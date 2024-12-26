@@ -21,9 +21,13 @@ import { Company } from '@/features/company'
 
 type MyProfileProps = {
   profile: Profile
+  isExternalView?: boolean
 }
 
-export const MyProfile = ({ profile }: MyProfileProps) => {
+export const MyProfile = ({
+  profile,
+  isExternalView = false
+}: MyProfileProps) => {
   console.log({
     profile
   })
@@ -35,7 +39,7 @@ export const MyProfile = ({ profile }: MyProfileProps) => {
     router.push(ROUTES.EDIT_COMPANY({ id: company.id }))
 
   const onView = (company: Company) =>
-    router.push(ROUTES.EDIT_COMPANY({ id: company.id }))
+    router.push(ROUTES.COMPANY_DETAILS({ id: company.id }))
 
   const onDelete = (company: Company) =>
     router.push(ROUTES.EDIT_COMPANY({ id: company.id }))

@@ -13,7 +13,9 @@ const ROUTES = {
   SUCCESS_CHANGE_EMAIL: '/my-profile/settings/change-email/success',
   CHANGE_PASSWORD: '/my-profile/settings/change-password',
   CONFIRM_CHANGE_PASSWORD: '/my-profile/settings/change-password/success',
-  EDIT_COMPANY: ({ id }: { id: string }) => `/my-companies/${id}/edit`
+  COMPANY_DETAILS: ({ id }: { id: string }) => `/my-companies/${id}`,
+  EDIT_COMPANY: ({ id }: { id: string }) => `/my-companies/${id}/edit`,
+  JOB_SEEKER_PROFILE: ({ id }: { id: string }) => `/job-seekers/${id}`
 }
 
 export { ROUTES }

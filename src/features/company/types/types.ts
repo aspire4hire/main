@@ -1,3 +1,9 @@
+/* eslint-disable no-unused-vars */
+export enum CompanyDetailTabsEnum {
+  OVERVIEW = 'OVERVIEW',
+  JOB_POSTING = 'JOB_POSTING'
+}
+
 export interface Company {
   id: string
   created_at: string

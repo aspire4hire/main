@@ -1,4 +1,6 @@
-import { OnboardingForm } from '@/features/onboarding'
+import { AppLayout, SettingsButton } from '@/components'
+import { CompanyDetailPage } from '@/features/company'
+
 import { getCompany } from '@/features/onboarding/actions'
 
 export default async function EditCompay({
@@ -11,8 +13,8 @@ export default async function EditCompay({
   const { data } = await getCompany({ id: id as string })
 
   return (
-    <>
-      <OnboardingForm isEditing company={data} isCompany />
-    </>
+    <AppLayout secondNavButton={<SettingsButton />} backButton={false}>
+      <CompanyDetailPage company={data} />
+    </AppLayout>
   )
 }

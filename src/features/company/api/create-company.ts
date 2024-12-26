@@ -1,6 +1,6 @@
 'use server'
+import { OnboardingCompanyDto, Profile } from '@/features/onboarding/types'
 import { createServerClient } from '@/lib/supabase-server'
-import { OnboardingCompanyDto, Profile } from '../types'
 
 type CreateCompanyParams = {
   body: OnboardingCompanyDto
