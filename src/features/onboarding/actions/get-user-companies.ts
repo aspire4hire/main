@@ -1,6 +1,6 @@
 'use server'
+import { Company } from '@/features/company'
 import { createServerClient } from '@/lib/supabase-server'
-import { Company } from '../types'
 
 export async function getUserCompanies(): Promise<{
   data: Company

@@ -25,14 +25,12 @@ Default.args = {
     {
       href: '/home',
       icon: { element: ResourcesIcon, size: IconSizeEnum['2XS'] },
-      title: 'Home',
-      isActive: true
+      title: 'Home'
     },
     {
       href: '/profile',
       icon: { element: ComunityIcon, size: IconSizeEnum['2XS'] },
-      title: 'Profile',
-      isActive: false
+      title: 'Profile'
     }
   ]
 }
@@ -44,20 +42,17 @@ CustomItems.args = {
     {
       href: '/dashboard',
       icon: { element: ResourcesIcon, size: IconSizeEnum.LG },
-      title: 'Dashboard',
-      isActive: true
+      title: 'Dashboard'
     },
     {
       href: '/settings',
       icon: { element: ComunityIcon, size: IconSizeEnum.LG },
-      title: 'Settings',
-      isActive: false
+      title: 'Settings'
     },
     {
       href: '/help',
       icon: { element: MessageIcon, size: IconSizeEnum.LG },
-      title: 'Help',
-      isActive: false
+      title: 'Help'
     }
   ]
 }

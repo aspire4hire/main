@@ -20,6 +20,7 @@ interface IconProps extends HTMLAttributes<SVGElement> {
   disabled?: boolean
   iconColor?: string
   bgColor?: string
+  stroke?: string
 }
 
 export type { IconProps }
