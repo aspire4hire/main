@@ -14,7 +14,7 @@ export const MyCompaniesPage = ({ companies }: MyCompaniesPageProps) => {
     return (
       <div className="flex flex-col items-center gap-14 pt-5">
         <Typography className="w-full text-center">
-          No company has been created yet.
+          No company has been created yet
         </Typography>
         <Button variant={'primaryWithSecondary'} rounded size={'xl'}>
           <CompanyIcon size={IconSizeEnum.SM} className="text-white" />
