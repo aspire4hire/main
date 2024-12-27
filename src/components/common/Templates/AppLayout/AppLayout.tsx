@@ -97,7 +97,7 @@ export const AppLayout = ({
         )}
         <div
           className={cn(
-            'h-full max-h-[calc(100%-65px)] w-full overflow-auto',
+            'h-full max-h-[calc(100%-65px)] w-full overflow-auto px-1 pb-5 md:px-1',
             !hideTopNav ? 'max-h-[calc(100%-65px)]' : 'max-h-full'
           )}
         >

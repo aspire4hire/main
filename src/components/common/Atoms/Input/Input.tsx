@@ -6,10 +6,21 @@ import { cn } from '@/lib/utils'
 import { InputProps } from './Input.types'
 import { Label } from '../Label'
 import { ErrorField } from '../ErrorField'
+import { Typography } from '../Typography'
+import { DescriptionAsLabel } from '../DescriptionAsLabel'
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, type = 'text', label, error, value, required, ...props },
+    {
+      className,
+      type = 'text',
+      label,
+      error,
+      value,
+      required,
+      description,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -20,6 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {required ? <span className="ml-1 text-destructive">*</span> : ''}
           </Label>
         )}
+        <DescriptionAsLabel description={description} />
         <input
           type={type}
           className={cn(

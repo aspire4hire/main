@@ -1,9 +1,18 @@
+'use client'
+
 import { Button, IconSizeEnum, NewFileIcon, Typography } from '@/components'
 import React from 'react'
 import { CompanyJobPost } from './CompanyJobPost/CompanyJobPost'
 import { JOB_POSTS_DUMMY } from '@/constants/dump-data'
+import { useRouter } from 'next/navigation'
+import { ROUTES } from '@/constants'
 
-export const CompanyJobPosts = () => {
+type CompanyJobPostsProps = {
+  companyId: string
+}
+
+export const CompanyJobPosts = ({ companyId }: CompanyJobPostsProps) => {
+  const router = useRouter()
   return (
     <div className="flex flex-col items-center gap-5 pt-5">
       <Typography className="w-full text-center">
@@ -14,6 +23,7 @@ export const CompanyJobPosts = () => {
         rounded
         size={'xl'}
         className="font-bold text-primary"
+        onClick={() => router.push(ROUTES.CREATE_JOB_POST({ id: companyId }))}
       >
         <NewFileIcon size={IconSizeEnum.SM} />
         New Job Post

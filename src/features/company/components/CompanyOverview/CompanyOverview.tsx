@@ -22,7 +22,7 @@ export const CompanyOverview = ({ company }: CompanyOverviewProps) => {
   return (
     <div className="flex flex-col items-center justify-center gap-5">
       <div className="relative flex w-full justify-center">
-        <Avatar src={company.logo_url} />
+        <Avatar src={company.logo_url} name={company.name} />
         <button
           onClick={() => router.push(ROUTES.EDIT_COMPANY({ id: company.id }))}
           type="button"

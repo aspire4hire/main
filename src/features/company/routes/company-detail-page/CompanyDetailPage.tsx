@@ -30,7 +30,9 @@ export const CompanyDetailPage = ({ company }: MyCompaniesPageProps) => {
         ]}
         activeTabId={activeTab}
       />
-      {activeTab === CompanyDetailTabsEnum.JOB_POSTING && <CompanyJobPosts />}
+      {activeTab === CompanyDetailTabsEnum.JOB_POSTING && (
+        <CompanyJobPosts companyId={company.id} />
+      )}
       {activeTab === CompanyDetailTabsEnum.OVERVIEW && (
         <CompanyOverview company={company} />
       )}

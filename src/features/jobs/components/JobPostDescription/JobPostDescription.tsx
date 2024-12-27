@@ -46,7 +46,7 @@ export const JobPostDescription = ({ job }: JobPostDescriptionProps) => {
       <div>
         <Typography variant="semiTitle">Skill Tags</Typography>
         <div className="mt-2 flex flex-wrap gap-3">
-          {job.skill_tags.map((skill, index) => (
+          {job.skills_jobs.map((skill, index) => (
             <Badge className="text-secondary" key={index}>
               {skill.skill_name}
             </Badge>
@@ -55,7 +55,7 @@ export const JobPostDescription = ({ job }: JobPostDescriptionProps) => {
       </div>
       <div className="h-[2px] w-full bg-tertiary/20"></div>
       <TextEditorPreview
-        content={job.key_responsibilities}
+        content={job.key_responsibilities_html}
         title="Key Responsibilities"
       />
       <TextEditorPreview

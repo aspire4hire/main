@@ -18,7 +18,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   const [hasError, setHasError] = useState(false)
   const sizeClass = size !== AvatarSizeEnum.CUSTOM ? AVATAR_SIZE[size] : ''
 
-  const className = cn('rounded-full object-cover ', sizeClass, classNameProp)
+  const className = cn('rounded-full object-cover', sizeClass, classNameProp)
 
   const iconSize = useMemo(() => {
     switch (size) {
@@ -33,7 +33,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div className="flex w-fit items-center gap-1">
-      <div className="h-fit w-fit overflow-hidden">
+      <div className="h-fit w-fit overflow-hidden rounded-full drop-shadow-lg">
         {hasError || !src ? (
           <div
             className={cn(
@@ -52,7 +52,7 @@ export const Avatar: React.FC<AvatarProps> = ({
           />
         )}
       </div>
-      <p className="font-semibold text-primary">{name}</p>
+      {name && <p className="ml-1 font-bold text-primary">{name}</p>}
     </div>
   )
 }

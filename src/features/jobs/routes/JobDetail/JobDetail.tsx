@@ -14,7 +14,11 @@ export const JobDetail = ({ job }: JobDetailProps) => {
   const [currentTab, setCurrentTab] = useState<'posts' | 'applicants'>('posts')
   return (
     <div className="flex flex-col items-center">
-      <Avatar size={AvatarSizeEnum.XL} />
+      <Avatar
+        size={AvatarSizeEnum.LG}
+        src={job?.company?.logo_url}
+        name={job?.company?.name}
+      />
       <div className="my-7 grid w-full grid-cols-2 gap-4">
         <button
           className={cn(
