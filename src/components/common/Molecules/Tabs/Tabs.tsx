@@ -30,7 +30,7 @@ export const Tabs = ({ items, activeTabId }: TabsProps) => {
           <Typography
             variant="p"
             className={cn(
-              'px-1 py-1 font-semibold transition-all duration-300',
+              'px-1 py-1 font-bold transition-all duration-300',
               isTabActive(item.id) ? 'text-primary' : 'text-tertiary'
             )}
           >

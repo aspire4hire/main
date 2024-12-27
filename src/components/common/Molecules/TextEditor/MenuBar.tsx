@@ -14,6 +14,7 @@ export const MenuBar = () => {
       <div className="flex flex-wrap gap-2">
         <Tooltip content={'Bold'}>
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
             disabled={!editor.can().chain().focus().toggleBold().run()}
             className={`rounded p-2 ${editor.isActive('bold') ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} h-fit`}
@@ -23,6 +24,7 @@ export const MenuBar = () => {
         </Tooltip>
         <Tooltip content={'Italic'}>
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
             disabled={!editor.can().chain().focus().toggleItalic().run()}
             className={`rounded p-2 ${editor.isActive('italic') ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} h-fit`}
@@ -31,6 +33,7 @@ export const MenuBar = () => {
           </button>
         </Tooltip>
         {/* <button
+        type='button'
             onClick={() => editor.chain().focus().setParagraph().run()}
             className={`rounded p-2 ${editor.isActive('paragraph') ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} h-fit`}
           >
@@ -38,6 +41,7 @@ export const MenuBar = () => {
           </button> */}
         <Tooltip content={'Bullet List'}>
           <button
+            type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={`rounded p-2 ${editor.isActive('bulletList') ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} h-fit`}
           >
@@ -46,6 +50,7 @@ export const MenuBar = () => {
         </Tooltip>
         <Tooltip content={'Undo'}>
           <button
+            type="button"
             onClick={() => editor.chain().focus().undo().run()}
             disabled={!editor.can().chain().focus().undo().run()}
             className={`h-fit rounded bg-gray-200 p-2 hover:bg-gray-300`}
@@ -55,6 +60,7 @@ export const MenuBar = () => {
         </Tooltip>
         <Tooltip content={'Redo'}>
           <button
+            type="button"
             onClick={() => editor.chain().focus().redo().run()}
             disabled={!editor.can().chain().focus().redo().run()}
             className={`h-fit rounded bg-gray-200 p-2 hover:bg-gray-300`}
