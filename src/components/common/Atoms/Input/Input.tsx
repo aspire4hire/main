@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 import { InputProps } from './Input.types'
 import { Label } from '../Label'
 import { ErrorField } from '../ErrorField'
-import { Typography } from '../Typography'
 import { DescriptionAsLabel } from '../DescriptionAsLabel'
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -19,6 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       required,
       description,
+      smallLabel,
       ...props
     },
     ref
@@ -28,6 +28,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <Label className="font-semibold text-tertiary">
             {`${label}`}
+            {smallLabel && (
+              <>
+                ,
+                <span className="ml-1 text-xs font-light text-tertiary">
+                  {smallLabel}
+                </span>
+              </>
+            )}
             {required ? <span className="ml-1 text-destructive">*</span> : ''}
           </Label>
         )}

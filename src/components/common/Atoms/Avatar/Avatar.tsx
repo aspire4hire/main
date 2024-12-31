@@ -8,12 +8,40 @@ import { cn } from '@/utils'
 import { AVATAR_SIZE } from './constants'
 import { ProfileIcon } from '../icons'
 import { IconSizeEnum } from '../icons/types'
+import Link from 'next/link'
+
+const AvatarWrapper = ({
+  href,
+  children,
+  justClickable
+}: {
+  href?: string
+  justClickable?: boolean
+  children: React.ReactNode
+}) => {
+  if (!href)
+    return <div className={'flex w-fit items-center gap-1'}>{children}</div>
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        'flex w-fit cursor-pointer items-center gap-1',
+        !justClickable && 'rounded-full bg-tertiary/15 px-3 py-1'
+      )}
+    >
+      {children}
+    </Link>
+  )
+}
 
 export const Avatar: React.FC<AvatarProps> = ({
   className: classNameProp,
   size = AvatarSizeEnum.MD,
   src,
-  name
+  name,
+  href,
+  justClickable
 }) => {
   const [hasError, setHasError] = useState(false)
   const sizeClass = size !== AvatarSizeEnum.CUSTOM ? AVATAR_SIZE[size] : ''
@@ -32,7 +60,10 @@ export const Avatar: React.FC<AvatarProps> = ({
   }, [size])
 
   return (
-    <div className="flex w-fit items-center gap-1">
+    <AvatarWrapper
+      href={name && !hasError && href ? href : undefined}
+      justClickable={justClickable}
+    >
       <div className="h-fit w-fit overflow-hidden rounded-full drop-shadow-lg">
         {hasError || !src ? (
           <div
@@ -53,6 +84,6 @@ export const Avatar: React.FC<AvatarProps> = ({
         )}
       </div>
       {name && <p className="ml-1 font-bold text-primary">{name}</p>}
-    </div>
+    </AvatarWrapper>
   )
 }

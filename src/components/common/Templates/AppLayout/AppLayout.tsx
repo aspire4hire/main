@@ -43,6 +43,7 @@ type AppLayoutProps = {
   secondNavButton?: ReactNode
   hideTopNav?: boolean
   hideBottomBar?: boolean
+  className?: HTMLElement['className']
 }
 
 export const AppLayout = ({
@@ -51,7 +52,8 @@ export const AppLayout = ({
   toBack,
   backButton = true,
   hideTopNav = false,
-  hideBottomBar = false
+  hideBottomBar = false,
+  className
 }: AppLayoutProps) => {
   const { profile, setCurrentSessionState } = useCurrentSessionStore()
 
@@ -98,7 +100,8 @@ export const AppLayout = ({
         <div
           className={cn(
             'h-full max-h-[calc(100%-65px)] w-full overflow-auto px-1 pb-5 md:px-1',
-            !hideTopNav ? 'max-h-[calc(100%-65px)]' : 'max-h-full'
+            !hideTopNav ? 'max-h-[calc(100%-65px)]' : 'max-h-full',
+            className
           )}
         >
           {children}

@@ -1,12 +1,17 @@
-import { Badge, TextEditorPreview, Typography } from '@/components'
+import { Badge, Button, TextEditorPreview, Typography } from '@/components'
 import React from 'react'
 import { Job } from '../../types'
+import { ApplyJobButton } from './ApplyJobButton'
 
 type JobPostDescriptionProps = {
   job: Job
+  isJobSeekerView?: boolean
 }
 
-export const JobPostDescription = ({ job }: JobPostDescriptionProps) => {
+export const JobPostDescription = ({
+  job,
+  isJobSeekerView
+}: JobPostDescriptionProps) => {
   return (
     <div className="w-full space-y-6">
       <div className="w-full space-y-1">
@@ -28,6 +33,13 @@ export const JobPostDescription = ({ job }: JobPostDescriptionProps) => {
         >
           {job.job_description}
         </Typography>
+        {isJobSeekerView && (
+          <ApplyJobButton
+            jobId={job.id}
+            isJobSeekerView={isJobSeekerView}
+            isAlreadyApplied={job.isApplicant}
+          />
+        )}
       </div>
       <div className="space-y-3">
         <Typography variant="p" className="font-bold text-tertiary">

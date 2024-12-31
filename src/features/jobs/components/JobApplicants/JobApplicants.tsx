@@ -5,35 +5,66 @@ import {
   Avatar,
   AvatarSizeEnum,
   IconSizeEnum,
+  Skeleton,
   Typography
 } from '@/components'
 import { ROUTES } from '@/constants'
-import { useSkillTrades } from '@/features/onboarding/hooks'
+import { useProvinces, useSkillTrades } from '@/features/onboarding/hooks'
 import { formatDate } from '@/utils'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { JobApplicant } from '../../types'
 
-export const JobApplicants = () => {
-  const { data } = useSkillTrades()
+type JobApplicantsProps = {
+  applicant: JobApplicant
+}
+
+export const JobApplicants = ({ applicant }: JobApplicantsProps) => {
+  console.log('🚀 ~ JobApplicants ~ applicant:', applicant)
+  const { data, isLoading } = useProvinces()
+
+  const provinceName = useMemo(
+    () =>
+      data.find(province => province.id === applicant.applicant?.province_id)
+        ?.province_name,
+    [applicant, data]
+  )
+
   return (
     <div className="w-full space-y-6 rounded-3xl border border-tertiary p-4">
-      <div className="flex w-full items-end justify-between">
+      <div className="flex w-full items-start justify-between">
         <div className="space-y-1">
-          <Avatar name="Jordan Blake" size={AvatarSizeEnum.XS} />
-          <Typography variant="p" className="text-xs text-tertiary">
-            Toronto, Ontario
-          </Typography>
+          <Avatar
+            name={
+              applicant.applicant?.first_name +
+              ' ' +
+              applicant.applicant?.last_name
+            }
+            justClickable
+            src={applicant.applicant?.profile_pic}
+            href={ROUTES.JOB_SEEKER_PROFILE({
+              id: applicant.applicant?.profile_id as string
+            })}
+            size={AvatarSizeEnum.XS}
+          />
+          {isLoading ? (
+            <Skeleton className="h-3 w-20"></Skeleton>
+          ) : (
+            <Typography variant="p" className="text-xs text-tertiary">
+              {applicant.applicant?.city_name}, {provinceName}
+            </Typography>
+          )}
         </div>
-        <div className="flex flex-col items-end gap-1">
+        <div className="flex h-full flex-col items-start gap-1">
           <div className="flex items-center gap-1">
-            <img src={data?.[1]?.trade_icon} className="h-6 w-6 rounded-full" />
+            <img
+              src={applicant.applicant?.skilled_trades?.[0]?.trade_icon}
+              className="h-6 w-6 rounded-full"
+            />
             <Typography variant="p" className="text-xs font-bold">
-              {data?.[1]?.trade_name}
+              {applicant.applicant?.skilled_trades?.[0]?.trade_name}
             </Typography>
           </div>
-          <Typography variant="p" className="text-xs text-tertiary">
-            5+ Years Experience
-          </Typography>
         </div>
       </div>
       <div className="flex w-full items-end justify-between">
@@ -48,7 +79,7 @@ export const JobApplicants = () => {
         </Typography>
         <Link
           href={ROUTES.JOB_SEEKER_PROFILE({
-            id: 'b1687944-2fc8-453c-a17f-f545c6d0aeb7'
+            id: applicant.applicant?.profile_id as string
           })}
           className="flex items-center gap-1 border-b-2 border-primary text-primary transition-all hover:border-primary/80 hover:text-primary/80"
         >
