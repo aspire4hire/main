@@ -1,17 +1,22 @@
-import { AppLayout, SettingsButton } from '@/components'
-import { JOB_POSTS_DUMMY } from '@/constants/dump-data'
+import { AppLayout } from '@/components'
 import { JobDetail } from '@/features/jobs'
+import { getJobPost } from '@/features/jobs/actions'
 
 export default async function EditCompay({
-  params
+  params,
+  searchParams
 }: {
   params: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const { id } = await params
 
+  const { data } = await getJobPost({ id: id as string })
+  console.log('🚀 ~ data:', data)
+
   return (
-    <AppLayout secondNavButton={<SettingsButton />}>
-      <JobDetail job={JOB_POSTS_DUMMY[0]} />
+    <AppLayout>
+      <JobDetail job={data} isJobSeekerView />
     </AppLayout>
   )
 }

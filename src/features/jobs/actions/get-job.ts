@@ -8,8 +8,10 @@ export async function getJobPost({ id }: { id: string }): Promise<{
 }> {
   const supabase = await createServerClient()
 
+  const { data: user } = await supabase.auth.getUser()
+
   const { data, error } = await supabase.functions.invoke(
-    `job-posts-get/${id}`,
+    `job-posts-get?job_id=${id}&user_id=${user.user?.id}`,
     {
       method: 'GET'
     }

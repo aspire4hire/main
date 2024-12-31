@@ -5,4 +5,6 @@ export type AvatarProps = {
   className?: string
   src?: string | undefined | null
   name?: string
+  href?: string
+  justClickable?: boolean
 }

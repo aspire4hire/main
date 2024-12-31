@@ -24,6 +24,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       onFileChange,
       onClick,
       accept,
+      type = 'button',
       ...props
     },
     ref
@@ -47,6 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             fullWidth && 'w-full'
           )}
           ref={ref}
+          type={type}
           disabled={isLoading || disabled}
           onClick={handleButtonClick}
           {...props}

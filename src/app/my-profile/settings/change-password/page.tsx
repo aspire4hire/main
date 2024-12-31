@@ -30,7 +30,6 @@ export default function ChangePasswordPage() {
         </>
       }
       onSubmit={form.handleSubmit(data => {
-        console.log('-- -SUBIMT --')
         onSubmit(data)
       })}
     >

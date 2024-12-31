@@ -24,12 +24,23 @@ const TextareaBase = React.forwardRef<
 TextareaBase.displayName = 'Textarea'
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, description, required, ...props }, ref) => {
+  (
+    { className, label, error, description, required, smallLabel, ...props },
+    ref
+  ) => {
     return (
       <div className="group relative">
         {label && (
           <Label className="font-semibold text-tertiary">
             {`${label}`}
+            {smallLabel && (
+              <>
+                ,
+                <span className="ml-1 text-xs font-light text-tertiary">
+                  {smallLabel}
+                </span>
+              </>
+            )}
             {required ? <span className="ml-1 text-destructive">*</span> : ''}
           </Label>
         )}

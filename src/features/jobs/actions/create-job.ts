@@ -15,7 +15,6 @@ export async function createJob({ body }: CreateJobParams): Promise<{
 
   const bodyData = {
     ...body,
-    job_description_html: 'example',
     poster_user_id: user.user?.id
   }
 

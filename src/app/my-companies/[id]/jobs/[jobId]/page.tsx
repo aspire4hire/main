@@ -2,7 +2,7 @@ import { AppLayout, EditButton } from '@/components'
 import { ROUTES } from '@/constants'
 
 import { JobDetail } from '@/features/jobs'
-import { getJobPost } from '@/features/jobs/actions'
+import { getJobApplicants, getJobPost } from '@/features/jobs/actions'
 
 export default async function JobPostCompanyPageDetail({
   params
@@ -11,7 +11,10 @@ export default async function JobPostCompanyPageDetail({
 }) {
   const { id, jobId } = await params
 
-  const { data } = await getJobPost({ id: jobId as string })
+  const [{ data }, { data: applicants }] = await Promise.all([
+    getJobPost({ id: jobId as string }),
+    getJobApplicants({ jobId: jobId as string })
+  ])
 
   return (
     <AppLayout
@@ -25,7 +28,7 @@ export default async function JobPostCompanyPageDetail({
       }
       hideBottomBar
     >
-      <JobDetail job={data} />
+      <JobDetail job={data} applicants={applicants} />
     </AppLayout>
   )
 }

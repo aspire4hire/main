@@ -1,11 +1,27 @@
 import { Company } from '@/features/company'
-import { SkillTrade } from '@/features/onboarding/types'
+import { Profile, SkillTrade } from '@/features/onboarding/types'
+
+export enum JobStatusEnum {
+  OPEN = 'open',
+  CLOSE = 'close'
+}
+
+export enum ApplicantStatusEnum {
+  PENDING = 'pending'
+}
 
 export interface Skill {
   id: string
   skill_name: string
   is_general: boolean
   skill_trades_id: string
+}
+
+export interface JobApplicant {
+  id: string
+  jobs_id: string
+  applicant_status: ApplicantStatusEnum
+  applicant?: Profile
 }
 
 export interface Job {
@@ -26,6 +42,9 @@ export interface Job {
   company: Company
   jobs_skilled_trades: SkillTrade[]
   skills_jobs: Skill[]
+  applicants?: JobApplicant[]
+  job_status?: JobStatusEnum
+  isApplicant?: boolean
 }
 
 export interface JobDTO {
@@ -43,4 +62,8 @@ export interface JobDTO {
   qualifications_html: string
   skilled_trades: string[]
   skills: string[]
+}
+
+export interface CreateApplicantDTO {
+  jobs_id: string
 }

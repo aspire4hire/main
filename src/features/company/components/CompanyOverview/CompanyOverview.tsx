@@ -3,7 +3,6 @@
 import React from 'react'
 import { Company } from '../../types'
 import {
-  Avatar,
   EditIcon,
   IconSizeEnum,
   TextEditorPreview,
@@ -21,12 +20,11 @@ export const CompanyOverview = ({ company }: CompanyOverviewProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-5">
-      <div className="relative flex w-full justify-center">
-        <Avatar src={company.logo_url} name={company.name} />
+      <div className="relative flex w-full justify-end">
         <button
           onClick={() => router.push(ROUTES.EDIT_COMPANY({ id: company.id }))}
           type="button"
-          className="absolute right-2 top-2 flex h-fit items-end gap-1 border-b border-tertiary text-tertiary outline-none"
+          className="flex h-fit items-end gap-1 border-b border-tertiary text-tertiary outline-none"
         >
           <EditIcon size={IconSizeEnum.SM} className="pb-1" />
           <Typography

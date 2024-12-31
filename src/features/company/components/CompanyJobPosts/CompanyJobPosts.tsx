@@ -6,18 +6,22 @@ import { CompanyJobPost } from './CompanyJobPost/CompanyJobPost'
 import { JOB_POSTS_DUMMY } from '@/constants/dump-data'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
+import { Job } from '@/features/jobs'
 
 type CompanyJobPostsProps = {
   companyId: string
+  jobs: Job[]
 }
 
-export const CompanyJobPosts = ({ companyId }: CompanyJobPostsProps) => {
+export const CompanyJobPosts = ({ companyId, jobs }: CompanyJobPostsProps) => {
   const router = useRouter()
   return (
     <div className="flex flex-col items-center gap-5 pt-5">
-      <Typography className="w-full text-center">
-        No have posted any job.
-      </Typography>
+      {jobs.length === 0 && (
+        <Typography className="w-full text-center">
+          No have posted any job.
+        </Typography>
+      )}
       <Button
         variant={'ghostSecondary'}
         rounded
@@ -29,7 +33,7 @@ export const CompanyJobPosts = ({ companyId }: CompanyJobPostsProps) => {
         New Job Post
       </Button>
       <div className="flex w-full flex-col gap-4">
-        {JOB_POSTS_DUMMY.map((job, index) => (
+        {jobs.map((job, index) => (
           <CompanyJobPost
             key={index}
             job={job}
