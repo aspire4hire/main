@@ -44,10 +44,6 @@ export async function updateSession(request: NextRequest) {
     data: { session }
   } = await supabase.auth.getSession()
 
-  console.log({
-    session
-  })
-
   if (
     !user &&
     !request.nextUrl.pathname.startsWith(ROUTES.LOGIN) &&

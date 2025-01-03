@@ -1,35 +1,34 @@
-import { useState } from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { useState } from 'react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Dialog,
   DialogHeader,
   DialogFooter,
   DialogTitle,
-  DialogDescription,
-} from "./Dialog";
-import { Button } from "../Button";
-import { Label } from "../Label";
-import { Input } from "../Input";
-import { DialogSizeEnum } from "./Dialog.types";
+  DialogDescription
+} from './Dialog'
+
+import { Button, Input, Label } from '../../Atoms'
+import { DialogSizeEnum } from './Dialog.types'
 
 // Metadatos del componente
 const meta: Meta = {
-  title: "Components/Dialog",
+  title: 'Components/Dialog',
   component: Dialog,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    isOpen: { control: "boolean" },
-    onClose: { action: "closed" },
-  },
-};
-export default meta;
+    isOpen: { control: 'boolean' },
+    onClose: { action: 'closed' }
+  }
+}
+export default meta
 
 // Historia controlada
 export const Controlled: StoryFn = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <div className="max-w-48 bg-red-300">
       <Button onClick={() => setIsOpen(true)}>Abrir Diálogo</Button>
       <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <DialogHeader>
@@ -65,14 +64,14 @@ export const Controlled: StoryFn = () => {
         </DialogFooter>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 export const Sizes: StoryFn = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [size, setSize] = useState(DialogSizeEnum.MD);
+  const [isOpen, setIsOpen] = useState(false)
+  const [size, setSize] = useState(DialogSizeEnum.MD)
 
   return (
-    <div>
+    <div className="max-w-44 overflow-hidden">
       <div className="flex flex-wrap gap-2">
         <Button onClick={() => (setIsOpen(true), setSize(DialogSizeEnum.SM))}>
           SM
@@ -129,5 +128,5 @@ export const Sizes: StoryFn = () => {
         </DialogFooter>
       </Dialog>
     </div>
-  );
-};
+  )
+}

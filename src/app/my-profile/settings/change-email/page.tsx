@@ -7,14 +7,31 @@ import {
   Input,
   Label,
   NavigationBar,
+  PageLoader,
   Typography
 } from '@/components'
+import { useCurrentSessionStore } from '@/features/auth'
 import { useChangeEmailController } from '@/features/auth/hooks'
+import { getUserProfile } from '@/features/onboarding/actions'
 import { getFormError } from '@/utils'
+import { useEffect } from 'react'
 import { Controller } from 'react-hook-form'
 
 export default function ChangeEmail() {
   const { form, onSubmit, isLoading } = useChangeEmailController()
+
+  const { profile, setCurrentSessionState } = useCurrentSessionStore()
+
+  useEffect(() => {
+    const getSession = async () => {
+      const profile = await getUserProfile()
+      setCurrentSessionState({ profile: profile.data })
+    }
+
+    getSession()
+  }, [setCurrentSessionState])
+
+  if (!profile) return <PageLoader />
 
   return (
     <FormContainer
@@ -41,7 +58,7 @@ export default function ChangeEmail() {
       </Typography>
       <div className="flex flex-col">
         <Label>Current Email</Label>
-        <Typography variant="p">useremail@example.com</Typography>
+        <Typography variant="p">{profile.email_address}</Typography>
       </div>
       <div className="mt-4">
         <Controller

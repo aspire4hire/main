@@ -18,4 +18,5 @@ export type DialogProps = React.ComponentPropsWithoutRef<
   onClose: () => void
   children: React.ReactNode
   size?: DialogSizeEnum
+  hideCloseButton?: boolean
 }
