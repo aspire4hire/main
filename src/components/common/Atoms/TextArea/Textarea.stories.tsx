@@ -20,20 +20,20 @@ export const Default = Template.bind({})
 Default.args = {
   label: 'Default Textarea',
   placeholder: 'Type something...',
-  hasError: false
+  error: 'error'
 }
 
 export const WithError = Template.bind({})
 WithError.args = {
   label: 'Textarea with Error',
   placeholder: 'Type something...',
-  hasError: true
+  error: 'error'
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
   label: 'Disabled Textarea',
   placeholder: 'Cannot type here...',
-  hasError: false,
+  error: 'error',
   disabled: true
 }

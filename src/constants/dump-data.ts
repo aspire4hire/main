@@ -1,7 +1,7 @@
 import { JobPostingProps } from '@/components/Feed/JobPosting/JobPosting.types'
 import { Job } from '@/features/jobs'
 
-export const JOBS_DUMMY: JobPostingProps[] = [
+export const JOBS_DUMMY: any[] = [
   {
     date: new Date('2023-12-01'),
     description:
@@ -66,7 +66,7 @@ export const JOBS_DUMMY: JobPostingProps[] = [
   }
 ]
 
-export const JOB_POSTS_DUMMY: Job[] = [
+export const JOB_POSTS_DUMMY: any[] = [
   {
     id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
     created_at: '2024-12-23T10:15:30Z',
