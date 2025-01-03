@@ -6,11 +6,13 @@ import {
   Button,
   CheckIcon,
   CloseIcon,
+  FileLoaderWrapper,
   FormContainer,
   IconSizeEnum,
   Input,
   Label,
   NavigationBar,
+  PageLoader,
   Skeleton,
   Textarea,
   Tooltip,
@@ -31,13 +33,17 @@ export const UploadVideoForm = () => {
 
   const { data: skills, isLoading: isLoadingSkills } = useSkills()
 
+  if (isLoading) {
+    return <PageLoader />
+  }
+
   return (
     <FormContainer
       isLoading={isLoading}
       submitButton={
         <>
           <CheckIcon size={IconSizeEnum.SM} />
-          <Typography className="text-white">Save New Password</Typography>
+          <Typography className="text-white">Publish Video</Typography>
         </>
       }
       onSubmit={form.handleSubmit(data => {
@@ -87,7 +93,6 @@ export const UploadVideoForm = () => {
               label="Video Description"
               smallLabel="Max 200 characters"
               placeholder="Some existing video description for the video"
-              description="Max 200 Characters."
               error={getFormError(form.formState?.errors, field.name)}
             />
           )}
@@ -111,18 +116,20 @@ export const UploadVideoForm = () => {
                 description={'Try to aim for a 1 minute video.'}
               />
               {field.value && (
-                <div className="mb-3 flex items-center gap-2">
-                  <Badge className="px-6 py-2 text-white">Video</Badge>
-                  <Tooltip content={'Remove Video'}>
-                    <Button
-                      size={'icon'}
-                      variant={'ghost'}
-                      onClick={() => field.onChange(null)}
-                    >
-                      <XIcon />
-                    </Button>
-                  </Tooltip>
-                </div>
+                <FileLoaderWrapper>
+                  <div className="mb-3 flex items-center gap-2">
+                    <Badge className="px-6 py-2 text-white">Video</Badge>
+                    <Tooltip content={'Remove Video'}>
+                      <Button
+                        size={'icon'}
+                        variant={'ghost'}
+                        onClick={() => field.onChange(null)}
+                      >
+                        <XIcon />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </FileLoaderWrapper>
               )}
               <Button
                 rounded
@@ -139,6 +146,11 @@ export const UploadVideoForm = () => {
                   Upload Video
                 </Typography>
               </Button>
+              {getFormError(form.formState?.errors, field.name) && (
+                <ErrorField
+                  error={getFormError(form.formState?.errors, field.name)}
+                />
+              )}
             </div>
           )}
         />
@@ -157,23 +169,33 @@ export const UploadVideoForm = () => {
                 Skills <span className="text-destructive">*</span>
               </Label>
               <DescriptionAsLabel description="Select skills you want applicants to have." />
-              <div className="flex flex-wrap gap-3">
-                {isLoadingSkills &&
-                  Array.from({ length: 5 }).map((_, index) => (
-                    <Skeleton key={index} className="h-5 w-32" />
-                  ))}
-                {field.value
-                  .map(skill => skills.find(s => s.id === skill)?.skill_name)
-                  .filter(Boolean)
-                  .map(skill => (
-                    <Badge
-                      key={skill}
-                      className="text-secondary hover:bg-primary"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-              </div>
+              {field.value.length !== 0 && (
+                <div className="mt-3 max-w-[85%] rounded-xl border-2 border-tertiary p-2">
+                  <Typography className="mb-2 font-bold">
+                    Selected Skills
+                  </Typography>
+                  <div className="flex flex-wrap gap-3 rounded-3xl">
+                    {isLoadingSkills &&
+                      Array.from({ length: 5 }).map((_, index) => (
+                        <Skeleton key={index} className="h-5 w-32" />
+                      ))}
+                    {field.value
+                      .map(
+                        skill => skills.find(s => s.id === skill)?.skill_name
+                      )
+                      .filter(Boolean)
+                      .map(skill => (
+                        <Badge
+                          key={skill}
+                          className="text-secondary hover:bg-primary"
+                        >
+                          {skill}
+                        </Badge>
+                      ))}
+                  </div>
+                </div>
+              )}
+
               <SkillsSelector
                 selectedSkills={field.value}
                 skills={skills}

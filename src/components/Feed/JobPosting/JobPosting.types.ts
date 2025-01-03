@@ -7,6 +7,7 @@ type JobPostingProps = {
     name?: string
     avatar?: string
   }
+  playback_id: string
 }
 
 export type { JobPostingProps }

@@ -1,6 +1,12 @@
 'use client'
 
-import { Button, CheckIcon, Dialog, Typography } from '@/components'
+import {
+  Button,
+  CheckIcon,
+  Dialog,
+  IconSizeEnum,
+  Typography
+} from '@/components'
 import React from 'react'
 import { useApplyJobController } from '../../hooks'
 
@@ -44,7 +50,7 @@ export const ApplyJobButton = ({
       </Dialog>
       {isJobSeekerView && isAlreadyApplied ? (
         <div className="flex w-fit items-center gap-2 rounded-3xl border border-tertiary bg-white px-3 py-2">
-          <CheckIcon />
+          <CheckIcon size={IconSizeEnum.XS} />
           <Typography className="font-bold">Applied</Typography>
         </div>
       ) : isJobSeekerView ? (

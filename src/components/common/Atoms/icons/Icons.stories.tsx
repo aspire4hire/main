@@ -29,6 +29,7 @@ import { CompanyIcon } from './CompanyIcon'
 import { CheckCircleIcon } from './CheckCircleIcon'
 import { SettingsIcon } from './SettingsIcon'
 import { HummerIcon } from './HummerIcon'
+import { PlayIcon } from './PlayIcon'
 
 export default {
   title: 'Icons',
@@ -62,7 +63,9 @@ const IconTemplate: StoryFn = args => {
     CompanyIcon,
     CheckCircleIcon,
     SettingsIcon,
-    HummerIcon
+    HummerIcon,
+    NewMessageIcon,
+    PlayIcon
   ]
 
   return (
