@@ -5,12 +5,14 @@ import { toast } from 'sonner'
 import { UploadVideo } from '../actions'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
+import { useCurrentSessionStore } from '@/features/auth'
 
 type UseUploadVideoFormParams = {
   data?: UploadVideoDTO
 }
 
 export const useUploadVideoForm = ({ data }: UseUploadVideoFormParams = {}) => {
+  const { profile } = useCurrentSessionStore()
   const router = useRouter()
   const form = useForm<UploadVideoDTO>({
     defaultValues: {
@@ -33,7 +35,8 @@ export const useUploadVideoForm = ({ data }: UseUploadVideoFormParams = {}) => {
   const onSubmit = async (data: UploadVideoDTO) => {
     setIsLoading(true)
     const { error } = await UploadVideo({
-      body: data
+      body: data,
+      userId: profile?.profile_id as string
     })
 
     if (error) {

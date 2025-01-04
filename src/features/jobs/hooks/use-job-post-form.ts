@@ -107,7 +107,7 @@ const useJobPostForm = ({ data }: UseJobPostFormParams = {}) => {
         router.push(
           ROUTES.JOB_POST_COMPANY({ id: data.id, companyId: data.company_id })
         )
-      } else router.push(ROUTES.JOB_POST_DETAIL({ id: '123' }))
+      } else router.push(ROUTES.COMPANY_DETAILS({ id: id as string }))
     }
   }
 

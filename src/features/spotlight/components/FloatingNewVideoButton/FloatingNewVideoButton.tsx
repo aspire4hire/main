@@ -1,9 +1,16 @@
+'use client'
+
 import { IconSizeEnum, NewVideoIcon } from '@/components'
 import { ROUTES } from '@/constants'
+import { useCurrentSessionStore } from '@/features/auth'
 import Link from 'next/link'
 import React from 'react'
 
 export const FloatingNewVideoButton = () => {
+  const { profile } = useCurrentSessionStore()
+
+  if (profile?.is_employer) return null
+
   return (
     <Link
       href={ROUTES.UPLOAD_VIDEO}

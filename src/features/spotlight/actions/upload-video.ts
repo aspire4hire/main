@@ -1,45 +1,32 @@
-'use server'
-import { createServerClient } from '@/lib/supabase-server'
+'use client'
+
 import { UploadVideoDTO } from '../types'
-import { uploadFileToStorage } from '@/features/common'
+import { uploadFileToStorageByClient } from '@/features/common'
 import { USER_VIDEOS } from '@/constants/storage'
+import { createVideo } from './create-video'
 
 type CreateJobParams = {
   body: UploadVideoDTO
+  userId: string
 }
 
-export async function UploadVideo({ body }: CreateJobParams): Promise<{
-  error: boolean
+export async function UploadVideo({ body, userId }: CreateJobParams): Promise<{
+  error: Error
 }> {
-  const supabase = await createServerClient()
-
-  const { data: user } = await supabase.auth.getUser()
-
-  console.log('---------- ENTRO -------- ', user.user?.id)
-
-  const fileUrl = await uploadFileToStorage({
+  const fileUrl = await uploadFileToStorageByClient({
     bucket: USER_VIDEOS,
     file: body.file,
-    name: `${user.user?.id}/${Date.now()}_${body.file.name}`
+    name: `${userId}/${Date.now()}_${body.file.name}`
   })
 
-  const bodyData = {
-    profile_id: user.user?.id,
-    video_url: fileUrl,
-    video_title: body.title,
-    video_description: body.description,
-    skills: body.skills
-  }
-
-  console.log('CREATE VIDEO BODY: ', bodyData)
-
-  const { data, error } = await supabase.functions.invoke(
-    'user-videos-create',
-    {
-      method: 'POST',
-      body: bodyData
+  const { error } = await createVideo({
+    body: {
+      description: body.description,
+      skills: body.skills,
+      title: body.title,
+      video_url: fileUrl as string
     }
-  )
+  })
 
   console.log({
     error

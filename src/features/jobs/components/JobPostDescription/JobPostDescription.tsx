@@ -19,25 +19,25 @@ export const JobPostDescription = ({
           variant="h6"
           className="w-full text-center font-bold leading-5"
         >
-          {job.job_title}
+          {job?.job_title}
         </Typography>
         <Typography
           variant="p"
           className="w-full text-center text-xs text-tertiary"
         >
-          {job.job_location}
+          {job?.job_location}
         </Typography>
         <Typography
           variant="p"
           className="w-full text-center text-[10px] font-medium md:text-xs"
         >
-          {job.job_description}
+          {job?.job_description}
         </Typography>
         {isJobSeekerView && (
           <ApplyJobButton
-            jobId={job.id}
+            jobId={job?.id}
             isJobSeekerView={isJobSeekerView}
-            isAlreadyApplied={job.isApplicant}
+            isAlreadyApplied={job?.isApplicant}
           />
         )}
       </div>
@@ -45,20 +45,20 @@ export const JobPostDescription = ({
         <Typography variant="p" className="font-bold text-tertiary">
           Position Type:
           <Typography variant="span" className="ml-1 font-normal">
-            {job.position_type}
+            {job?.position_type}
           </Typography>
         </Typography>
         <Typography variant="p" className="font-bold text-tertiary">
           Salary Type:
           <Typography variant="span" className="ml-1 font-normal">
-            {job.salary_range}
+            {job?.salary_range}
           </Typography>
         </Typography>
       </div>
       <div>
         <Typography variant="semiTitle">Skill Tags</Typography>
         <div className="mt-2 flex flex-wrap gap-3">
-          {job.skills_jobs.map((skill, index) => (
+          {job?.skills_jobs.map((skill, index) => (
             <Badge className="text-secondary" key={index}>
               {skill.skill_name}
             </Badge>
@@ -67,11 +67,11 @@ export const JobPostDescription = ({
       </div>
       <div className="h-[2px] w-full bg-tertiary/20"></div>
       <TextEditorPreview
-        content={job.key_responsibilities_html}
+        content={job?.key_responsibilities_html}
         title="Key Responsibilities"
       />
       <TextEditorPreview
-        content={job.qualifications_html}
+        content={job?.qualifications_html}
         title="Qualifications"
       />
     </div>
