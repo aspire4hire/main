@@ -50,7 +50,7 @@ export const VideoThumbnail = ({
           <MuxPlayer
             playbackId={playback_id}
             // className="h-fit w-fit md:max-h-[80vh] md:max-w-[80vw]"
-            className="h-[90vh] w-[90vw]"
+            className="h-[90dvh] w-[90dvw]"
             accentColor="#023047"
           />
         </div>

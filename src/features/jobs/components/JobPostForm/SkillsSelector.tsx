@@ -52,7 +52,7 @@ export const SkillsSelector = ({
           Select Skills
         </div>
       </DrawerTrigger>
-      <DrawerContent className="h-screen">
+      <DrawerContent className="h-[100dvh] overflow-auto">
         <DrawerTitle></DrawerTitle>
         <div className="mx-auto mt-4 max-w-xl px-3">
           <Typography className="w-full text-center font-bold" variant="h6">

@@ -6,7 +6,7 @@ const DialogSize: Record<DialogSizeEnum, string> = {
   lg: 'max-w-[640px]',
   xl: 'max-w-[800px]',
   '2xl': 'max-w-[1024px]',
-  full: 'max-w-[100vw] w-full',
+  full: 'max-w-[100dvw] w-full',
   custom: ''
 }
 
