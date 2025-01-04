@@ -67,7 +67,7 @@ export const LoginForm = () => {
           Forgot password?
         </Link>
       </div>
-      <Button isLoading={isLoading} fullWidth size={'lg'}>
+      <Button type="submit" isLoading={isLoading} fullWidth size={'lg'}>
         SIGN IN
       </Button>
       <Typography variant="body2">
