@@ -27,9 +27,18 @@ import { useSkills } from '@/features/jobs/hooks'
 import { SkillsSelector } from '@/features/jobs/components/JobPostForm/SkillsSelector'
 import { ErrorField } from '@/components/common/Atoms/ErrorField'
 import { XIcon } from 'lucide-react'
+import { UploadVideoDTO } from '../../types'
 
-export const UploadVideoForm = () => {
-  const { form, onSubmit, isLoading, handleChageVideo } = useUploadVideoForm()
+type UploadVideoFormProps = {
+  data?: UploadVideoDTO
+  isEditing?: boolean
+}
+
+export const UploadVideoForm = ({ data, isEditing }: UploadVideoFormProps) => {
+  const { form, onSubmit, isLoading, handleChageVideo } = useUploadVideoForm({
+    data,
+    isEditing
+  })
 
   const { data: skills, isLoading: isLoadingSkills } = useSkills()
 
@@ -43,7 +52,9 @@ export const UploadVideoForm = () => {
       submitButton={
         <>
           <CheckIcon size={IconSizeEnum.SM} />
-          <Typography className="text-white">Publish Video</Typography>
+          <Typography className="text-white">
+            {isEditing ? 'Finish Edits' : 'Publish Video'}
+          </Typography>
         </>
       }
       onSubmit={form.handleSubmit(data => {
@@ -52,7 +63,7 @@ export const UploadVideoForm = () => {
     >
       <NavigationBar backButton />
       <Typography variant="h5" className="mb-5 w-full text-center">
-        Upload a Video
+        {isEditing ? 'Edit Your Post' : 'Upload a Video'}
       </Typography>
       <div className="space-y-8">
         <Controller
@@ -97,63 +108,67 @@ export const UploadVideoForm = () => {
             />
           )}
         />
-        <Controller
-          control={form.control}
-          name="file"
-          rules={{
-            required: 'video is required'
-          }}
-          render={({ field }) => (
-            <div>
-              <Label className="font-semibold text-tertiary">
-                Video File ,
-                <span className="ml-1 text-xs font-light text-tertiary">
-                  Max 1GB
-                </span>
-                <span className="ml-1 text-destructive">*</span>
-              </Label>
-              <DescriptionAsLabel
-                description={'Try to aim for a 1 minute video.'}
-              />
-              {field.value && (
-                <FileLoaderWrapper>
-                  <div className="mb-3 flex items-center gap-2">
-                    <Badge className="px-6 py-2 text-white">Video</Badge>
-                    <Tooltip content={'Remove Video'}>
-                      <Button
-                        size={'icon'}
-                        variant={'ghost'}
-                        onClick={() => field.onChange(null)}
-                      >
-                        <XIcon />
-                      </Button>
-                    </Tooltip>
-                  </div>
-                </FileLoaderWrapper>
-              )}
-              <Button
-                rounded
-                isFileUpload
-                type="button"
-                accept="video/*"
-                onFileChange={event => handleChageVideo(event, field.onChange)}
-              >
-                <AttachIcon size={IconSizeEnum.SM} />
-                <Typography
-                  className="font-semibold text-secondary"
-                  variant="span"
-                >
-                  Upload Video
-                </Typography>
-              </Button>
-              {getFormError(form.formState?.errors, field.name) && (
-                <ErrorField
-                  error={getFormError(form.formState?.errors, field.name)}
+        {!isEditing && (
+          <Controller
+            control={form.control}
+            name="file"
+            rules={{
+              required: 'video is required'
+            }}
+            render={({ field }) => (
+              <div>
+                <Label className="font-semibold text-tertiary">
+                  Video File ,
+                  <span className="ml-1 text-xs font-light text-tertiary">
+                    Max 1GB
+                  </span>
+                  <span className="ml-1 text-destructive">*</span>
+                </Label>
+                <DescriptionAsLabel
+                  description={'Try to aim for a 1 minute video.'}
                 />
-              )}
-            </div>
-          )}
-        />
+                {field.value && (
+                  <FileLoaderWrapper>
+                    <div className="mb-3 flex items-center gap-2">
+                      <Badge className="px-6 py-2 text-white">Video</Badge>
+                      <Tooltip content={'Remove Video'}>
+                        <Button
+                          size={'icon'}
+                          variant={'ghost'}
+                          onClick={() => field.onChange(null)}
+                        >
+                          <XIcon />
+                        </Button>
+                      </Tooltip>
+                    </div>
+                  </FileLoaderWrapper>
+                )}
+                <Button
+                  rounded
+                  isFileUpload
+                  type="button"
+                  accept="video/*"
+                  onFileChange={event =>
+                    handleChageVideo(event, field.onChange)
+                  }
+                >
+                  <AttachIcon size={IconSizeEnum.SM} />
+                  <Typography
+                    className="font-semibold text-secondary"
+                    variant="span"
+                  >
+                    Upload Video
+                  </Typography>
+                </Button>
+                {getFormError(form.formState?.errors, field.name) && (
+                  <ErrorField
+                    error={getFormError(form.formState?.errors, field.name)}
+                  />
+                )}
+              </div>
+            )}
+          />
+        )}
         <Controller
           name="skills"
           control={form.control}

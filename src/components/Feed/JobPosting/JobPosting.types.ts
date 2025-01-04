@@ -1,4 +1,5 @@
 type JobPostingProps = {
+  id: string
   date: Date
   title: string
   description: string

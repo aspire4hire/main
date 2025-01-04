@@ -42,6 +42,7 @@ export const UserVideoPostsList = ({ userId }: UserVideoPostsListProps) => {
           skills={job.skills.map(skill => skill.skill_name)}
           playback_id={job.playback_id}
           title={job.video_title}
+          id={job.id}
           key={index}
         />
       )}

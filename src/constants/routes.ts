@@ -25,7 +25,8 @@ const ROUTES = {
     `/my-companies/${companyId}/jobs/${id}/edit`,
   JOB_POST_DETAIL: ({ id }: { id: string }) => `/jobs/${id}`,
   JOB_SEEKER_PROFILE: ({ id }: { id: string }) => `/job-seekers/${id}`,
-  UPLOAD_VIDEO: '/upload-video'
+  UPLOAD_VIDEO: '/upload-video',
+  EDIT_UPLOAD_VIDEO: ({ id }: { id: string }) => `/upload-video/${id}/edit`
 }
 
 export { ROUTES }
