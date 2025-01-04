@@ -10,7 +10,7 @@ export const PublicJobPosts = ({ jobs }: PublicJobPostsProps) => {
   return (
     <div className="flex flex-col gap-3">
       {jobs.map((job, index) => (
-        <CompanyJobPost job={job} key={index} />
+        <CompanyJobPost job={job} key={index} isExternalView />
       ))}
     </div>
   )

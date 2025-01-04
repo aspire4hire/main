@@ -5,7 +5,8 @@ import {
   CheckIcon,
   Dialog,
   IconSizeEnum,
-  Typography
+  Typography,
+  DialogTitle
 } from '@/components'
 import React from 'react'
 import { useApplyJobController } from '../../hooks'
@@ -26,6 +27,7 @@ export const ApplyJobButton = ({
   return (
     <div className="flex justify-center py-3">
       <Dialog isOpen={disclosure.isOpen} onClose={onAceptApply}>
+        <DialogTitle className="hidden"></DialogTitle>
         <div className="mb-8 w-full space-y-3">
           <Typography
             variant="h6"

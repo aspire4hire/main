@@ -2,7 +2,11 @@
 import { createServerClient } from '@/lib/supabase-server'
 import { Profile } from '../types'
 
-export async function getUserProfile(): Promise<{
+export async function getUserProfile({
+  id
+}: {
+  id?: string
+} = {}): Promise<{
   data: Profile
   error: Error
 }> {
@@ -10,7 +14,7 @@ export async function getUserProfile(): Promise<{
   const { data: user } = await supabase.auth.getUser()
 
   const { data, error } = await supabase.functions.invoke(
-    `user-profiles-get/${user.user?.id}`,
+    `user-profiles-get/${id ?? user.user?.id}`,
     {
       method: 'GET'
     }

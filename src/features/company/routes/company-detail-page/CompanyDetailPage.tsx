@@ -65,10 +65,17 @@ export const CompanyDetailPage = ({ company, jobs }: MyCompaniesPageProps) => {
         activeTabId={activeTab}
       />
       {activeTab === CompanyDetailTabsEnum.JOB_POSTING && (
-        <CompanyJobPosts companyId={company.id} jobs={jobs} />
+        <CompanyJobPosts
+          companyId={company.id}
+          jobs={jobs}
+          isExternalView={!profile?.companies?.some(c => c.id === company.id)}
+        />
       )}
       {activeTab === CompanyDetailTabsEnum.OVERVIEW && (
-        <CompanyOverview company={company} />
+        <CompanyOverview
+          company={company}
+          isExternalView={!profile?.companies?.some(c => c.id === company.id)}
+        />
       )}
     </div>
   )

@@ -11,9 +11,14 @@ import { Job } from '@/features/jobs'
 type CompanyJobPostsProps = {
   companyId: string
   jobs: Job[]
+  isExternalView?: boolean
 }
 
-export const CompanyJobPosts = ({ companyId, jobs }: CompanyJobPostsProps) => {
+export const CompanyJobPosts = ({
+  companyId,
+  jobs,
+  isExternalView
+}: CompanyJobPostsProps) => {
   const router = useRouter()
   return (
     <div className="flex flex-col items-center gap-5 pt-5">
@@ -22,16 +27,18 @@ export const CompanyJobPosts = ({ companyId, jobs }: CompanyJobPostsProps) => {
           No have posted any job.
         </Typography>
       )}
-      <Button
-        variant={'ghostSecondary'}
-        rounded
-        size={'xl'}
-        className="font-bold text-primary"
-        onClick={() => router.push(ROUTES.CREATE_JOB_POST({ id: companyId }))}
-      >
-        <NewFileIcon size={IconSizeEnum.SM} />
-        New Job Post
-      </Button>
+      {!isExternalView && (
+        <Button
+          variant={'ghostSecondary'}
+          rounded
+          size={'xl'}
+          className="font-bold text-primary"
+          onClick={() => router.push(ROUTES.CREATE_JOB_POST({ id: companyId }))}
+        >
+          <NewFileIcon size={IconSizeEnum.SM} />
+          New Job Post
+        </Button>
+      )}
       <div className="flex w-full flex-col gap-4">
         {jobs.map((job, index) => (
           <CompanyJobPost
@@ -39,6 +46,7 @@ export const CompanyJobPosts = ({ companyId, jobs }: CompanyJobPostsProps) => {
             job={job}
             onCloseJobPost={() => {}}
             onDeleteJobPost={() => {}}
+            isExternalView={isExternalView}
           />
         ))}
       </div>

@@ -7,13 +7,15 @@ export default async function JobSeekerProfilePage({
 }: {
   params: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  //   const { id } = await params
+  const { id } = await params
 
-  const { data } = await getUserProfile()
+  const { data } = await getUserProfile({
+    id: id as string
+  })
 
   return (
     <AppLayout>
-      <MyProfile profile={data} isExternalView />
+      <MyProfile profile={data} isExternalView={data.profile_id !== id} />
     </AppLayout>
   )
 }

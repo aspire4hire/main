@@ -168,7 +168,7 @@ export const UploadVideoForm = () => {
               <Label className="text-tertiary">
                 Skills <span className="text-destructive">*</span>
               </Label>
-              <DescriptionAsLabel description="Select skills you want applicants to have." />
+              <DescriptionAsLabel description="Select skills shown in your video." />
               {field.value.length !== 0 && (
                 <div className="mt-3 max-w-[85%] rounded-xl border-2 border-tertiary p-2">
                   <Typography className="mb-2 font-bold">

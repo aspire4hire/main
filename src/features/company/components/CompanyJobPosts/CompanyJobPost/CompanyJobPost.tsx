@@ -22,17 +22,19 @@ type CompanyJobPostProps = {
   job: Job
   onCloseJobPost?: (job: Job) => void
   onDeleteJobPost?: (job: Job) => void
+  isExternalView?: boolean
 }
 export const CompanyJobPost = ({
   job,
   onCloseJobPost,
-  onDeleteJobPost
+  onDeleteJobPost,
+  isExternalView
 }: CompanyJobPostProps) => {
-  const isJobSeekerView = !Array.isArray(job.applicants)
+  const isJobSeekerView = isExternalView
 
   return (
     <div className="flex w-full flex-col gap-3 rounded-3xl border border-tertiary p-4">
-      {!isJobSeekerView ? (
+      {!isJobSeekerView && !isExternalView ? (
         <div className="flex w-full items-center justify-between">
           <Badge className="bg-primary text-primary-foreground">
             {job.job_status === JobStatusEnum.OPEN ? 'OPEN' : 'CLOSED'}
@@ -81,6 +83,8 @@ export const CompanyJobPost = ({
             src={job.company.logo_url}
             name={job.company.name}
             size={AvatarSizeEnum.XS}
+            href={ROUTES.COMPANY_DETAILS_JOOB_SEEKER({ id: job.company.id })}
+            justClickable
           />
         </div>
       )}
@@ -126,7 +130,7 @@ export const CompanyJobPost = ({
             {formatDate(job.created_at, { outputFormat: 'dd/MM/yyyy' })}
           </Typography>
         </Typography>
-        {!isJobSeekerView && (
+        {!isJobSeekerView && !isExternalView && (
           <Typography className="text-[10px] font-bold text-tertiary md:text-xs">
             Applicants:
             <Typography
