@@ -68,7 +68,7 @@ export const JOBS_DUMMY: any[] = [
 
 export const JOB_POSTS_DUMMY: any[] = [
   {
-    id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+    id: 'f47ac10b-58cc-4372-a567-33242424',
     created_at: '2024-12-23T10:15:30Z',
     company_id: '9d5a2f8b-6444-4e60-9a42-6c1c4fbd9e70',
     poster_user_id: 'c91d21a8-1111-4b66-9231-2f4ad04b9098',
