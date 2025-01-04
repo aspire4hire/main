@@ -21,6 +21,7 @@ export async function uploadFileToStorage(params: Params) {
       .upload(name, file, {
         upsert: true
       })
+    console.log('...... ERROR .... ', error)
     if (data?.path && !error) {
       const {
         data: { publicUrl }

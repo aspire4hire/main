@@ -6,6 +6,7 @@ type JobPostingProps = {
   user: {
     name?: string
     avatar?: string
+    id: string
   }
   playback_id: string
 }

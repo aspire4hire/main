@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { AppLayout, Typography } from '@/components'
 import { FloatingNewVideoButton } from '@/features/spotlight/components'
 import { VideoPostsList } from '@/features/spotlight/components/VideoPostsList/VideoPostsList'
@@ -16,11 +17,15 @@ export default async function Home() {
     <AppLayout className="relative" hideTopNav>
       <FloatingNewVideoButton />
       <div className="py-5">
-        <img src="/assets/logo_4h.png" className="mb-5 w-32" />
+        <img
+          src="/assets/logo_4h.png"
+          className="mb-5 w-32"
+          alt="company logo"
+        />
         <Typography variant="h2" className="mb-0 text-2xl font-bold">
           Spotlight
         </Typography>
-        <Typography className="text-black">
+        <Typography className="mb-5 text-black">
           Explore top trades talent through video showcases. Filter by trade,
           skill, and certifications to find your perfect match.
         </Typography>

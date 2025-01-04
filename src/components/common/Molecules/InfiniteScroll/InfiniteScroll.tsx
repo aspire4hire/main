@@ -27,11 +27,17 @@ const InfiniteScroll = <T,>({
   const observerRef = useRef<HTMLDivElement | null>(null)
 
   const loadData = async () => {
+    console.log('------------- LLAMANDO API ----- ')
     if (!hasMore) return
     try {
       setIsLoading(true)
       const newData = await fetchData(page, limit)
-      setData(prevData => [...prevData, ...newData])
+      setData(prevData => {
+        const ids = new Set()
+        return [...prevData, ...newData].filter(
+          ({ id }: any) => !ids.has(id) && ids.add(id)
+        )
+      })
       setHasMore(newData.length > 0)
     } catch (error) {
       console.error('Error loading data:', error)
@@ -48,6 +54,7 @@ const InfiniteScroll = <T,>({
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting && hasMore && !isLoading) {
+          console.log('--- HERE --')
           setPage(prevPage => prevPage + 1)
         }
       },

@@ -1,4 +1,4 @@
-import { AppLayout, SettingsButton } from '@/components'
+import { AppLayout } from '@/components'
 import { MyProfile } from '@/features/onboarding'
 import { getUserProfile } from '@/features/onboarding/actions'
 
@@ -12,8 +12,8 @@ export default async function JobSeekerProfilePage({
   const { data } = await getUserProfile()
 
   return (
-    <AppLayout secondNavButton={<SettingsButton />}>
-      <MyProfile profile={data} />
+    <AppLayout>
+      <MyProfile profile={data} isExternalView />
     </AppLayout>
   )
 }

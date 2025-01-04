@@ -11,6 +11,7 @@ import {
 } from '@/components'
 import { JOBS_DUMMY } from '@/constants/dump-data'
 import { Profile } from '@/features/onboarding/types'
+import { UserVideoPostsList } from './UserVideoPostsList'
 
 type JobSekeerProfileDetailsProps = {
   profile: Profile
@@ -49,13 +50,7 @@ export const JobSekeerProfileDetails = ({
       <Typography className="mb-2 mt-6" variant="semiTitle">
         Video Portfolio
       </Typography>
-      <div className="flex flex-col">
-        <div className="space-y-4">
-          {JOBS_DUMMY.map((job, index) => (
-            <JobPosting {...job} key={index} />
-          ))}
-        </div>
-      </div>
+      <UserVideoPostsList userId={profile.profile_id} />
     </div>
   )
 }

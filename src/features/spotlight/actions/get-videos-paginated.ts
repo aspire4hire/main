@@ -5,25 +5,31 @@ import { UserVideo } from '../types'
 
 export async function getVideosPaginated({
   limit,
-  page
+  page,
+  userId
 }: {
   limit: number
   page: number
+  userId?: string
 }): Promise<{
   data: UserVideo[]
   error: Error
 }> {
   const supabase = await createServerClient()
 
+  const userFilter = userId ? `&user-id=${userId}` : ''
+
   const { data, error } = await supabase.functions.invoke(
-    `user-videos-get?limit=${limit}&page=${page}`,
+    `user-videos-get?limit=${limit}&page=${page}${userFilter}`,
     {
       method: 'GET'
     }
   )
 
   console.log({
-    data
+    cantidad: data.length,
+    page,
+    limit
   })
 
   if (error) {

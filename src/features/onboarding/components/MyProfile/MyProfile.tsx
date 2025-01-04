@@ -82,15 +82,17 @@ export const MyProfile = ({
           </div>
         )}
 
-        <Button
-          variant={'primaryWithSecondary'}
-          rounded
-          className="mt-4"
-          onClick={() => router.push(ROUTES.EDIT_PROFILE)}
-        >
-          <EditIcon className="text-xs text-white" size={IconSizeEnum.SM} />
-          Edit Profile
-        </Button>
+        {!isExternalView && (
+          <Button
+            variant={'primaryWithSecondary'}
+            rounded
+            className="mt-4"
+            onClick={() => router.push(ROUTES.EDIT_PROFILE)}
+          >
+            <EditIcon className="text-xs text-white" size={IconSizeEnum.SM} />
+            Edit Profile
+          </Button>
+        )}
       </div>
       <div className="mb-8 mt-3 h-[2px] w-full bg-primary"></div>
       {profile.is_employer ? (

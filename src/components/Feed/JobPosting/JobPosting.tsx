@@ -25,7 +25,7 @@ export const JobPosting = ({
             })}
           </Typography>
           <Avatar
-            href={ROUTES.JOB_SEEKER_PROFILE({ id: '123' })}
+            href={ROUTES.JOB_SEEKER_PROFILE({ id: user.id })}
             justClickable
             name={user.name}
             src={user.avatar}

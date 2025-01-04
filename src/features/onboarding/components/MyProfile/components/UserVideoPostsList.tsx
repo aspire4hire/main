@@ -2,15 +2,21 @@
 
 import { InfiniteScroll, JobPosting } from '@/components'
 import React from 'react'
-import { getVideosPaginated } from '../../actions'
-import { UserVideo } from '../../types'
-import { Loader2 } from 'lucide-react'
 
-export const VideoPostsList = () => {
+import { Loader2 } from 'lucide-react'
+import { getVideosPaginated } from '@/features/spotlight/actions'
+import { UserVideo } from '@/features/spotlight/types'
+
+type UserVideoPostsListProps = {
+  userId: string
+}
+
+export const UserVideoPostsList = ({ userId }: UserVideoPostsListProps) => {
   const getVideos = async (page: number, limit: number) => {
     const { data } = await getVideosPaginated({
       limit: limit,
-      page
+      page,
+      userId
     })
 
     return data

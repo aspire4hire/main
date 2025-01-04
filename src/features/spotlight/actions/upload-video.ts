@@ -15,6 +15,8 @@ export async function UploadVideo({ body }: CreateJobParams): Promise<{
 
   const { data: user } = await supabase.auth.getUser()
 
+  console.log('---------- ENTRO -------- ', user.user?.id)
+
   const fileUrl = await uploadFileToStorage({
     bucket: USER_VIDEOS,
     file: body.file,
