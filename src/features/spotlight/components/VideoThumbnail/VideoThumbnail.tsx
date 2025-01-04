@@ -36,7 +36,7 @@ export const VideoThumbnail = ({
       <Dialog
         isOpen={disclosure.isOpen}
         onClose={disclosure.onClose}
-        className="h-screen border-0 bg-transparent p-2 shadow-none outline-none"
+        className="h-[100dvh] border-0 bg-transparent p-2 shadow-none outline-none"
         hideCloseButton
         size={DialogSizeEnum.FULLSCREEN}
       >

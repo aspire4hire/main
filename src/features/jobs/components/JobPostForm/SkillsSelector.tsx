@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  CloseIcon,
   Drawer,
   DrawerContent,
   DrawerTitle,
@@ -54,7 +55,14 @@ export const SkillsSelector = ({
       </DrawerTrigger>
       <DrawerContent className="h-[100dvh] overflow-auto">
         <DrawerTitle></DrawerTitle>
-        <div className="mx-auto mt-4 max-w-xl px-3">
+        <Button
+          variant={'icon'}
+          className="absolute right-4 top-4"
+          onClick={() => setIsOpen(false)}
+        >
+          <CloseIcon size={IconSizeEnum.XS} />
+        </Button>
+        <div className="mx-auto mt-4 max-h-[100dvh] max-w-xl overflow-auto px-3 py-4 md:py-0">
           <Typography className="w-full text-center font-bold" variant="h6">
             Select Skills
           </Typography>
