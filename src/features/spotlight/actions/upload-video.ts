@@ -24,7 +24,8 @@ export async function UploadVideo({ body, userId }: CreateJobParams): Promise<{
       description: body.description,
       skills: body.skills,
       title: body.title,
-      video_url: fileUrl as string
+      video_url: fileUrl as string,
+      id: body.id
     }
   })
 
