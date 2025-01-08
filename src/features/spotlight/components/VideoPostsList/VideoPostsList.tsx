@@ -20,7 +20,7 @@ export const VideoPostsList = () => {
       fetchData={getVideos}
       loader={
         <div className="flex w-full items-center justify-center py-3">
-          <Loader2 className="h-5 w-5 animate-spin text-primary" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       }
       className="flex flex-col gap-4"

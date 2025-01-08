@@ -17,7 +17,7 @@ export default async function CompanyDetail({
   ])
 
   return (
-    <AppLayout secondNavButton={<SettingsButton />} backButton={false}>
+    <AppLayout>
       <CompanyDetailPage jobs={jobs} company={data} />
     </AppLayout>
   )

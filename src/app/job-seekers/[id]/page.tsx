@@ -15,7 +15,7 @@ export default async function JobSeekerProfilePage({
 
   return (
     <AppLayout>
-      <MyProfile profile={data} isExternalView={data.profile_id !== id} />
+      <MyProfile profile={data} isExternalView />
     </AppLayout>
   )
 }

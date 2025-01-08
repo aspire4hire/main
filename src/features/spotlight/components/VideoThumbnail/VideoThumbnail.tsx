@@ -14,6 +14,7 @@ import { MUX_THUMBNAIL_URL } from '@/lib'
 import { useDisclosure } from '@/utils'
 import MuxPlayer from '@mux/mux-player-react'
 import { X } from 'lucide-react'
+import RetryableImage from './RetryableImage'
 
 type VideoThumbnailProps = {
   playback_id: string
@@ -49,7 +50,6 @@ export const VideoThumbnail = ({
         <div className="flex h-full w-full items-center justify-center">
           <MuxPlayer
             playbackId={playback_id}
-            // className="h-fit w-fit md:max-h-[80vh] md:max-w-[80vw]"
             className="h-[90dvh] w-[90dvw]"
             accentColor="#023047"
           />
@@ -65,11 +65,18 @@ export const VideoThumbnail = ({
             className="!h-16 !w-16 text-white transition-all duration-300 group-hover:!h-[50px] group-hover:!w-[50px]"
           />
         </div>
-        <img
+        <RetryableImage
           src={`${MUX_THUMBNAIL_URL}/${playback_id}/thumbnail.${format}?width=${width}&height=${height}&format=${format}&fit_mode=${fitMode}`}
           className="h-[168px] w-[128px] rounded-xl object-cover"
           alt="thumbnail"
+          maxRetries={100}
+          retryInterval={2500}
         />
+        {/* <img
+          src={`${MUX_THUMBNAIL_URL}/${playback_id}/thumbnail.${format}?width=${width}&height=${height}&format=${format}&fit_mode=${fitMode}`}
+          className="h-[168px] w-[128px] rounded-xl object-cover"
+          alt="thumbnail"
+        /> */}
       </div>
     </>
   )

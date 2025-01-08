@@ -28,7 +28,6 @@ import { ErrorField } from '@/components/common/Atoms/ErrorField'
 import { DescriptionAsLabel } from '@/components/common/Atoms/DescriptionAsLabel'
 import { SkillsSelector } from './SkillsSelector'
 import { JobDTO } from '../../types'
-import { useRouter } from 'next/navigation'
 
 type JobPostFormProps = {
   isEditing?: boolean
@@ -69,7 +68,7 @@ export const JobPostForm = ({ isEditing, data }: JobPostFormProps) => {
         </>
       }
     >
-      {isEditing && <NavigationBar backButton className="py-2 pt-0" />}
+      <NavigationBar backButton className="py-2 pt-0" />
       <Typography variant="h5" className="w-full text-center font-bold">
         {CONTENT.title}
       </Typography>

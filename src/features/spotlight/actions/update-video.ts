@@ -22,7 +22,7 @@ export async function updateVideo({
   }
 
   const { data, error } = await supabase.functions.invoke(
-    'user-videos-update',
+    `user-videos-update/${body.id}`,
     {
       method: 'PUT',
       body: bodyData

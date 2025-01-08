@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ArrowRightIcon,
   Avatar,
@@ -13,42 +15,78 @@ import {
   Typography
 } from '@/components'
 import { ROUTES } from '@/constants'
+import { useJobStatusController } from '@/features/company/hooks'
 import { Job, JobStatusEnum } from '@/features/jobs'
-import { formatDate } from '@/utils'
+import { cn, formatDate } from '@/utils'
 import { Trash2Icon } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 type CompanyJobPostProps = {
   job: Job
-  onCloseJobPost?: (job: Job) => void
-  onDeleteJobPost?: (job: Job) => void
   isExternalView?: boolean
+  hideActions?: boolean
 }
 export const CompanyJobPost = ({
   job,
-  onCloseJobPost,
-  onDeleteJobPost,
-  isExternalView
+  isExternalView,
+  hideActions
 }: CompanyJobPostProps) => {
+  const router = useRouter()
   const isJobSeekerView = isExternalView
 
+  const { isLoading, onSubmit } = useJobStatusController()
+
+  const redirectToJob = !isJobSeekerView
+    ? ROUTES.JOB_POST_COMPANY({
+        id: job.id,
+        companyId: job.company.id
+      })
+    : ROUTES.JOB_POST_JOOB_SEEKER_VIEW({
+        jobId: job.id
+      })
+
+  console.log({ status: job.job_status })
+
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border border-tertiary p-4">
+    <div
+      className={cn(
+        'flex w-full cursor-pointer flex-col gap-3 rounded-3xl border border-tertiary p-4',
+        isLoading && 'animate-pulse bg-tertiary/10'
+      )}
+      onClick={() => router.push(redirectToJob)}
+    >
       {!isJobSeekerView && !isExternalView ? (
         <div className="flex w-full items-center justify-between">
-          <Badge className="bg-primary text-primary-foreground">
+          <Badge
+            className={cn(
+              'text-primary-foreground',
+              JobStatusEnum.OPEN === job.job_status
+                ? 'bg-primary hover:bg-primary'
+                : 'bg-primary/50 hover:bg-primary/50'
+            )}
+          >
             {job.job_status === JobStatusEnum.OPEN ? 'OPEN' : 'CLOSED'}
           </Badge>
           <Popover>
-            <PopoverTrigger asChild>
-              <Button variant={'icon'}>
+            <PopoverTrigger asChild disabled={isLoading}>
+              <Button variant={'icon'} onClick={e => e.stopPropagation()}>
                 <ThreeDotIcon size={IconSizeEnum.SM} />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-48 bg-gray-100 p-0">
-              {onCloseJobPost && (
+              {!hideActions && (
                 <button
-                  onClick={() => onCloseJobPost(job)}
+                  onClick={e => {
+                    e.stopPropagation()
+                    onSubmit({
+                      jobId: job.id,
+                      status:
+                        (job.job_status as JobStatusEnum) === JobStatusEnum.OPEN
+                          ? JobStatusEnum.CLOSE
+                          : JobStatusEnum.OPEN
+                    })
+                  }}
                   className="flex w-full items-center gap-2 p-3 transition-all hover:bg-tertiary/10"
                 >
                   <EditIcon
@@ -56,13 +94,14 @@ export const CompanyJobPost = ({
                     className="!h-5 !w-5 font-semibold text-primary"
                   />
                   <Typography variant="span" className="text-sm font-semibold">
-                    CLOSE JOB
+                    {job.job_status === JobStatusEnum.OPEN ? 'CLOSE' : 'OPEN'}{' '}
+                    JOB
                   </Typography>
                 </button>
               )}
-              {onDeleteJobPost && (
+              {!hideActions && (
                 <button
-                  onClick={() => onDeleteJobPost(job)}
+                  onClick={() => {}}
                   className="flex w-full items-center gap-1 p-3 transition-all hover:bg-tertiary/10"
                 >
                   <Trash2Icon className="!h-5 !w-5 font-semibold text-destructive" />
@@ -100,19 +139,7 @@ export const CompanyJobPost = ({
             {job.job_location}
           </Typography>
         </div>
-        <Link
-          href={
-            !isJobSeekerView
-              ? ROUTES.JOB_POST_COMPANY({
-                  id: job.id,
-                  companyId: job.company.id
-                })
-              : ROUTES.JOB_POST_JOOB_SEEKER_VIEW({
-                  jobId: job.id
-                })
-          }
-          className="appearance-none outline-none"
-        >
+        <Link href={redirectToJob} className="appearance-none outline-none">
           <ArrowRightIcon
             size={IconSizeEnum['2XL']}
             className="font-light text-secondary"

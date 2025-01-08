@@ -1,9 +1,9 @@
 import { Company } from '@/features/company'
-import { Profile, SkillTrade } from '@/features/onboarding/types'
+import { Profile, Province, SkillTrade } from '@/features/onboarding/types'
 
 export enum JobStatusEnum {
   OPEN = 'open',
-  CLOSE = 'close'
+  CLOSE = 'closed'
 }
 
 export enum ApplicantStatusEnum {
@@ -21,7 +21,9 @@ export interface JobApplicant {
   id: string
   jobs_id: string
   applicant_status: ApplicantStatusEnum
-  applicant?: Profile
+  applicant?: Omit<Profile, 'province_id'> & {
+    province: Province
+  }
 }
 
 export interface Job {
@@ -66,4 +68,9 @@ export interface JobDTO {
 
 export interface CreateApplicantDTO {
   jobs_id: string
+}
+
+export interface UpdateJobStatusDTO {
+  jobId: string
+  status: JobStatusEnum
 }

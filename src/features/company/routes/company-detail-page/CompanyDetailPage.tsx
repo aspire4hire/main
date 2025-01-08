@@ -19,7 +19,7 @@ export const CompanyDetailPage = ({ company, jobs }: MyCompaniesPageProps) => {
   const { activeTab, handleChangeTab } = useCompanyDetailState()
   const { profile } = useCurrentSessionStore()
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 py-6">
       <div className="flex w-full justify-center">
         <Avatar
           src={company.logo_url}

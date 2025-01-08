@@ -3,7 +3,6 @@
 import { Button, IconSizeEnum, NewFileIcon, Typography } from '@/components'
 import React from 'react'
 import { CompanyJobPost } from './CompanyJobPost/CompanyJobPost'
-import { JOB_POSTS_DUMMY } from '@/constants/dump-data'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
 import { Job } from '@/features/jobs'
@@ -20,6 +19,7 @@ export const CompanyJobPosts = ({
   isExternalView
 }: CompanyJobPostsProps) => {
   const router = useRouter()
+
   return (
     <div className="flex flex-col items-center gap-5 pt-5">
       {jobs.length === 0 && (
@@ -44,8 +44,6 @@ export const CompanyJobPosts = ({
           <CompanyJobPost
             key={index}
             job={job}
-            onCloseJobPost={() => {}}
-            onDeleteJobPost={() => {}}
             isExternalView={isExternalView}
           />
         ))}

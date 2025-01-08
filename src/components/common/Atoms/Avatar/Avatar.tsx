@@ -29,6 +29,7 @@ const AvatarWrapper = ({
         'flex w-fit cursor-pointer items-center gap-1',
         !justClickable && 'rounded-full bg-tertiary/15 px-3 py-1'
       )}
+      onClick={e => e.stopPropagation()}
     >
       {children}
     </Link>

@@ -30,7 +30,8 @@ export const useUploadVideoForm = ({
       form.reset({
         description: data.description,
         skills: data.skills,
-        title: data.title
+        title: data.title,
+        id: data.id
       })
     }
   }, [data])
@@ -41,6 +42,7 @@ export const useUploadVideoForm = ({
       const { error } = await updateVideo({
         body: {
           description: data.description,
+          id: data.id,
           skills: data.skills,
           title: data.title
         }
@@ -52,6 +54,9 @@ export const useUploadVideoForm = ({
         setIsLoading(false)
         return
       }
+      toast.success('Video updated successfully', {
+        position: 'top-center'
+      })
     } else {
       const { error } = await UploadVideo({
         body: data,
@@ -65,6 +70,10 @@ export const useUploadVideoForm = ({
         setIsLoading(false)
         return
       }
+
+      toast.success('Video created successfully', {
+        position: 'top-center'
+      })
     }
     router.push(ROUTES.HOME)
   }

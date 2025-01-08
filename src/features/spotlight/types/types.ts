@@ -6,6 +6,7 @@ export interface UploadVideoDTO {
   skills: string[]
   description: string
   title: string
+  id: string
 }
 
 export interface UserVideo {

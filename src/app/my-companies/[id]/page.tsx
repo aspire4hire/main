@@ -1,4 +1,4 @@
-import { AppLayout, SettingsButton } from '@/components'
+import { AppLayout } from '@/components'
 import { CompanyDetailPage } from '@/features/company'
 import { getCompanyJobs } from '@/features/jobs/actions'
 
@@ -17,7 +17,7 @@ export default async function EditCompay({
   ])
 
   return (
-    <AppLayout secondNavButton={<SettingsButton />} backButton={false}>
+    <AppLayout hideTopNav backButton={false}>
       <CompanyDetailPage jobs={jobs} company={data} />
     </AppLayout>
   )

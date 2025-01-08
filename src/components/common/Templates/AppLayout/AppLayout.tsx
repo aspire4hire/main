@@ -7,6 +7,7 @@ import { cn } from '@/utils'
 import { useCurrentSessionStore } from '@/features/auth'
 import { getUserProfile } from '@/features/onboarding/actions'
 import { USER_TYPES } from '@/types'
+import { ROUTES } from '@/constants'
 
 const items = [
   {
@@ -20,7 +21,8 @@ const items = [
     href: '/jobs',
     icon: { element: HummerIcon },
     title: 'Jobs',
-    access: [USER_TYPES.JOBSEEKER]
+    access: [USER_TYPES.JOBSEEKER],
+    otherMatchRoutes: ['company']
   },
   {
     href: '/my-companies',
@@ -74,12 +76,26 @@ export const AppLayout = ({
 
   const navItems = useMemo(
     () =>
-      items.filter(item => {
-        const userType = profile?.is_employer
-          ? USER_TYPES.EMPLOYER
-          : USER_TYPES.JOBSEEKER
-        return item.access.includes(userType)
-      }),
+      items
+        .filter(item => {
+          const userType = profile?.is_employer
+            ? USER_TYPES.EMPLOYER
+            : USER_TYPES.JOBSEEKER
+          return item.access.includes(userType)
+        })
+        .map(item => {
+          if (profile?.is_employer && item.title === 'Company') {
+            const firstCompanyId = profile.companies?.[0]?.id
+
+            const newCompaniesHref = firstCompanyId
+              ? ROUTES.COMPANY_DETAILS({ id: firstCompanyId })
+              : item.href
+
+            return { ...item, href: newCompaniesHref }
+          }
+
+          return item
+        }),
     [profile]
   )
 

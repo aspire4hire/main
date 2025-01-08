@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
 import { CompanyProfileDetails, JobSekeerProfileDetails } from './components'
 import { Company } from '@/features/company'
+import { MailIcon } from 'lucide-react'
 
 type MyProfileProps = {
   profile: Profile
@@ -82,7 +83,7 @@ export const MyProfile = ({
           </div>
         )}
 
-        {!isExternalView && (
+        {!isExternalView ? (
           <Button
             variant={'primaryWithSecondary'}
             rounded
@@ -91,6 +92,20 @@ export const MyProfile = ({
           >
             <EditIcon className="text-xs text-white" size={IconSizeEnum.SM} />
             Edit Profile
+          </Button>
+        ) : (
+          <Button
+            variant={'ghostSecondary'}
+            rounded
+            className="mt-4 text-sm font-bold text-primary"
+            size={'xxl'}
+            onClick={() => {
+              const mailtoLink = `mailto:${profile.email_address}`
+              window.location.href = mailtoLink
+            }}
+          >
+            <MailIcon />
+            Contact
           </Button>
         )}
       </div>

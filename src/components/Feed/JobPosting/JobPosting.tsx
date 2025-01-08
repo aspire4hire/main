@@ -82,7 +82,11 @@ export const JobPosting = ({
       <div className="grid grid-cols-3">
         <div className="col-span-2 pr-3">
           <Avatar
-            href={ROUTES.JOB_SEEKER_PROFILE({ id: user.id })}
+            href={
+              (profile?.is_employer &&
+                ROUTES.JOB_SEEKER_PROFILE({ id: user.id })) ||
+              undefined
+            }
             justClickable
             name={user.name}
             src={user.avatar}

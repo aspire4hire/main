@@ -27,7 +27,6 @@ const InfiniteScroll = <T,>({
   const observerRef = useRef<HTMLDivElement | null>(null)
 
   const loadData = async () => {
-    console.log('------------- LLAMANDO API ----- ')
     if (!hasMore) return
     try {
       setIsLoading(true)
@@ -54,7 +53,6 @@ const InfiniteScroll = <T,>({
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting && hasMore && !isLoading) {
-          console.log('--- HERE --')
           setPage(prevPage => prevPage + 1)
         }
       },

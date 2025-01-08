@@ -19,7 +19,8 @@ export default async function EditVideo({
         description: data.video_description,
         file: '' as any,
         skills: data.skills.map(skill => skill.id),
-        title: data.video_title
+        title: data.video_title,
+        id: data.id
       }}
     />
   )

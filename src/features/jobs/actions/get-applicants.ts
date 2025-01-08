@@ -12,7 +12,7 @@ export async function getJobApplicants({ jobId }: { jobId: string }): Promise<{
   const { data: user } = await supabase.auth.getUser()
 
   const { data, error } = await supabase.functions.invoke(
-    `applicants-get?job_id=${jobId}&user_id=${user.user?.id}`,
+    `applicants-get?job-id=${jobId}`,
     {
       method: 'GET'
     }
