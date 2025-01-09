@@ -20,7 +20,9 @@ export async function updateProfile({ body }: UpdateProfileParams): Promise<{
 
   const { data: userSession } = await supabase.auth.getUser()
 
-  let profilePic = body?.profile_pic
+  let profilePic =
+    body?.profile_pic ||
+    'https://adcoiocsxshtcmzmxoyd.supabase.co/storage/v1/object/public/profile-pics/Icon_DefaultProfilePic.png'
   let resumePic = body?.resume_url
   let logoPic = body?.logo_url
 
@@ -62,7 +64,9 @@ export async function updateProfile({ body }: UpdateProfileParams): Promise<{
   const bodyData = {
     ...(body?.first_name && { first_name: body.first_name }),
     ...(body?.last_name && { last_name: body.last_name }),
-    ...(profilePic && { profile_pic: profilePic }),
+    ...(profilePic && {
+      profile_pic: profilePic
+    }),
     ...(body?.city_name && { city_name: body.city_name }),
     ...(body?.province_id && { province_id: body.province_id }),
     ...(typeof body?.is_employer === 'boolean' && {

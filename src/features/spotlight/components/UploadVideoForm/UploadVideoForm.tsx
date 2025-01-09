@@ -147,7 +147,7 @@ export const UploadVideoForm = ({ data, isEditing }: UploadVideoFormProps) => {
                   rounded
                   isFileUpload
                   type="button"
-                  accept="video/*"
+                  accept=".mp4, .mov, .hevc, video/mp4, video/quicktime, video/x-hevc"
                   onFileChange={event =>
                     handleChageVideo(event, field.onChange)
                   }

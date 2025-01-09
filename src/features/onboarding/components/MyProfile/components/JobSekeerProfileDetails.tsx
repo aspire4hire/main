@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import {
@@ -5,11 +7,9 @@ import {
   Button,
   CheckCircleIcon,
   IconSizeEnum,
-  JobPosting,
   TextEditorPreview,
   Typography
 } from '@/components'
-import { JOBS_DUMMY } from '@/constants/dump-data'
 import { Profile } from '@/features/onboarding/types'
 import { UserVideoPostsList } from './UserVideoPostsList'
 
@@ -20,6 +20,11 @@ type JobSekeerProfileDetailsProps = {
 export const JobSekeerProfileDetails = ({
   profile
 }: JobSekeerProfileDetailsProps) => {
+  const onDownloadResume = () => {
+    if (!profile.resume_url) return
+    window.open(profile.resume_url, '_blank')
+  }
+
   return (
     <div className="w-full">
       <TextEditorPreview
@@ -30,6 +35,8 @@ export const JobSekeerProfileDetails = ({
         variant={'outline'}
         rounded
         className="mt-2 flex items-center gap-2"
+        onClick={onDownloadResume}
+        disabled={!profile.resume_url}
       >
         <AttachIcon size={IconSizeEnum.MD} className="!text-primary" />
         View Resume

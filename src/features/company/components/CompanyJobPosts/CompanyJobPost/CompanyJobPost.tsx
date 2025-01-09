@@ -51,7 +51,7 @@ export const CompanyJobPost = ({
   return (
     <div
       className={cn(
-        'flex w-full cursor-pointer flex-col gap-3 rounded-3xl border border-tertiary p-4',
+        'flex w-full cursor-pointer flex-col gap-3 rounded-3xl border border-tertiary p-4 transition-all hover:bg-tertiary/10',
         isLoading && 'animate-pulse bg-tertiary/10'
       )}
       onClick={() => router.push(redirectToJob)}

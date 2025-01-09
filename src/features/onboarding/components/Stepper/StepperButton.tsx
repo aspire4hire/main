@@ -16,10 +16,10 @@ export const StepperButton = ({
 }: StepperButtonProps) => {
   return (
     <Button
-      fullWidth
       className="flex items-center gap-3 rounded-b-none rounded-t-3xl py-6 shadow-2xl"
       isLoading={isLoading}
       disabled={isDisabled}
+      variant={'form'}
       onClick={onClick}
     >
       {children}

@@ -183,7 +183,7 @@ export const JobSeekerDetailedInfo = () => {
               <Button
                 rounded
                 isFileUpload
-                accept="application/pdf"
+                accept=".pdf, .docx, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onFileChange={event =>
                   handleChangeProfilePic(event, field.onChange)
                 }

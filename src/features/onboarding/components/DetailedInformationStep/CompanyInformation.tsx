@@ -145,7 +145,7 @@ export const CompanyInformation = () => {
             <Button
               rounded
               isFileUpload
-              accept="image/*"
+              accept=".png, .jpg, .jpeg, image/png, image/jpeg, image/img"
               onFileChange={event =>
                 handleChangeProfilePic(event, field.onChange)
               }
