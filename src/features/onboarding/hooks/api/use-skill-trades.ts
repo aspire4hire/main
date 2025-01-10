@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
-import { SkillTrade } from '../../types'
 import { getSkillTrades } from '../../actions'
+import { useSkillsTradesStateStore } from '../../store/use-skill-trades-store'
 
 const useSkillTrades = () => {
-  const [skillsTrades, setSkillsTrades] = useState<SkillTrade[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const { setSkillsTradesState, skillsTrades } = useSkillsTradesStateStore()
 
   useEffect(() => {
     const getSkills = async () => {
       setIsLoading(true)
       const skillTrades = await getSkillTrades()
       setIsLoading(false)
-      setSkillsTrades(skillTrades)
+      setSkillsTradesState({ skillsTrades: skillTrades })
     }
-    getSkills()
-  }, [])
+
+    if (skillsTrades.length === 0) getSkills()
+  }, [setSkillsTradesState, skillsTrades.length])
 
   return {
     data: skillsTrades,

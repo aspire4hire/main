@@ -22,7 +22,6 @@ export async function getVideoThumbnail({
 
   const blob = new Blob([imageBuffer], { type: 'image/png' })
   const url1 = URL.createObjectURL(blob)
-  console.log('🚀 ~ url1:', url1)
 
   return {
     data: imageBuffer

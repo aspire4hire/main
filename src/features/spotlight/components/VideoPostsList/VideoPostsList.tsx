@@ -5,12 +5,20 @@ import React from 'react'
 import { getVideosPaginated } from '../../actions'
 import { UserVideo } from '../../types'
 import { Loader2 } from 'lucide-react'
+import { useSpotlightStateStoreStore } from '../../store'
+import { JobPostingLoader } from '@/components/Feed/JobPosting/JobPostingLoader'
 
 export const VideoPostsList = () => {
-  const getVideos = async (page: number, limit: number) => {
+  const { filter } = useSpotlightStateStoreStore()
+  const getVideos = async (
+    page: number,
+    limit: number,
+    otherFilters?: object
+  ) => {
     const { data } = await getVideosPaginated({
       limit: limit,
-      page
+      page,
+      ...otherFilters
     })
 
     return data
@@ -19,10 +27,18 @@ export const VideoPostsList = () => {
     <InfiniteScroll
       fetchData={getVideos}
       loader={
-        <div className="flex w-full items-center justify-center py-3">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
+        <>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <JobPostingLoader key={index} />
+          ))}
+        </>
       }
+      otherFilters={[
+        ...filter.credentials,
+        ...filter.skills,
+        ...filter.skillTrades
+      ]}
+      extraFilters={filter}
       className="flex flex-col gap-4"
       renderItem={(job: UserVideo, index) => (
         <JobPosting

@@ -1,7 +1,7 @@
 'use server'
 
 import { createServerClient } from '@/lib/supabase-server'
-import { UploadVideoDTO, UserVideo } from '../types'
+import { UploadVideoDTO } from '../types'
 
 export async function createVideo({
   body
@@ -23,6 +23,8 @@ export async function createVideo({
     video_description: body.description,
     skills: body.skills
   }
+
+  console.log({ bodyData })
 
   const { data, error } = await supabase.functions.invoke(
     'user-videos-create',

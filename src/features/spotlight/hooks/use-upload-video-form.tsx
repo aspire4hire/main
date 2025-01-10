@@ -82,7 +82,6 @@ export const useUploadVideoForm = ({
     event: React.ChangeEvent<HTMLInputElement>,
     onChange: (value: any) => void
   ) => {
-    console.log('---- VALUE -- ', event.target.files)
     const file = event.target.files?.[0]
 
     if (file) {

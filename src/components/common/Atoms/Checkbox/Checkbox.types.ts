@@ -5,4 +5,5 @@ export type CheckboxProps = React.ComponentPropsWithoutRef<
   typeof CheckboxPrimitive.Root
 > & {
   label?: string
+  classNameLabel?: HTMLElement['className']
 }

@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
-import { Credential } from '../../types'
 import { getCredentials } from '../../actions'
+import { useCredentialStateStore } from '../../store'
 
 const useCredentials = () => {
-  const [credentials, setCredentials] = useState<Credential[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const { credentials, setCredentialState } = useCredentialStateStore()
 
   useEffect(() => {
     const getSkills = async () => {
       setIsLoading(true)
       const skillTrades = await getCredentials()
       setIsLoading(false)
-      setCredentials(skillTrades)
+      setCredentialState({ credentials: skillTrades })
     }
-    getSkills()
-  }, [])
+
+    if (credentials.length === 0) getSkills()
+  }, [credentials.length, setCredentialState])
 
   return {
     data: credentials,

@@ -3,9 +3,9 @@
 import { InfiniteScroll, JobPosting } from '@/components'
 import React from 'react'
 
-import { Loader2 } from 'lucide-react'
 import { getVideosPaginated } from '@/features/spotlight/actions'
 import { UserVideo } from '@/features/spotlight/types'
+import { JobPostingLoader } from '@/components/Feed/JobPosting/JobPostingLoader'
 
 type UserVideoPostsListProps = {
   userId: string
@@ -25,9 +25,11 @@ export const UserVideoPostsList = ({ userId }: UserVideoPostsListProps) => {
     <InfiniteScroll
       fetchData={getVideos}
       loader={
-        <div className="flex w-full items-center justify-center py-3">
-          <Loader2 className="h-5 w-5 animate-spin text-primary" />
-        </div>
+        <>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <JobPostingLoader key={index} />
+          ))}
+        </>
       }
       className="flex flex-col gap-4"
       renderItem={(job: UserVideo, index) => (

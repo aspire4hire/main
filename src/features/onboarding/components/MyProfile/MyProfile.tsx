@@ -29,11 +29,6 @@ export const MyProfile = ({
   profile,
   isExternalView = false
 }: MyProfileProps) => {
-  console.log({
-    profile
-  })
-  const { data: provinces, isLoading } = useProvinces()
-
   const router = useRouter()
 
   const onEdit = (company: Company) =>
@@ -52,17 +47,9 @@ export const MyProfile = ({
         <Typography variant="h4" className="mb-0 mt-2 font-semibold leading-6">
           {[profile.first_name, profile.last_name].filter(Boolean).join(' ')}
         </Typography>
-        {isLoading ? (
-          <Skeleton className="mt-1 h-3 w-52" />
-        ) : (
-          <Typography variant="p" className="my-0 text-xs text-tertiary">
-            {profile.city_name},{' '}
-            {
-              provinces.find(province => province.id === profile.province_id)
-                ?.province_name
-            }
-          </Typography>
-        )}
+        <Typography variant="p" className="my-0 text-xs text-tertiary">
+          {profile.city_name}, {profile.province?.province_name}
+        </Typography>
         {profile.is_employer ? (
           <div className="my-4 flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-tertiary/20">

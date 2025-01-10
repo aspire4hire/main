@@ -3,12 +3,18 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 type InfiniteScrollProps<T> = {
-  fetchData: (page: number, limit: number) => Promise<T[]>
+  fetchData: (
+    page: number,
+    limit: number,
+    otherFilters?: object
+  ) => Promise<T[]>
   renderItem: (item: T, index: number) => React.ReactNode
   limit?: number
   loader?: React.ReactNode
   noMoreDataMessage?: React.ReactNode
   className?: HTMLElement['className']
+  otherFilters?: string[]
+  extraFilters?: object
 }
 
 const InfiniteScroll = <T,>({
@@ -17,7 +23,9 @@ const InfiniteScroll = <T,>({
   limit = 10,
   loader = <p>Loading...</p>,
   noMoreDataMessage = <p>No more data</p>,
-  className
+  className,
+  otherFilters,
+  extraFilters = {}
 }: InfiniteScrollProps<T>) => {
   const [data, setData] = useState<T[]>([])
   const [page, setPage] = useState(1)
@@ -30,7 +38,7 @@ const InfiniteScroll = <T,>({
     if (!hasMore) return
     try {
       setIsLoading(true)
-      const newData = await fetchData(page, limit)
+      const newData = await fetchData(page, limit, extraFilters)
       setData(prevData => {
         const ids = new Set()
         return [...prevData, ...newData].filter(
@@ -46,8 +54,16 @@ const InfiniteScroll = <T,>({
   }
 
   useEffect(() => {
-    loadData()
-  }, [page])
+    setPage(1)
+    setData([])
+    setHasMore(true)
+  }, [JSON.stringify(otherFilters)])
+
+  useEffect(() => {
+    setTimeout(() => {
+      loadData()
+    }, 0)
+  }, [page, JSON.stringify(otherFilters)])
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -13,10 +13,20 @@ type CreateJobParams = {
 export async function UploadVideo({ body, userId }: CreateJobParams): Promise<{
   error: Error
 }> {
+  const today = new Date()
+
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+
+  const path = `${userId}/${year}/${month}/${day}/${Date.now()}_${body.file.name}`
+
+  console.log('🚀 ~ UploadVideo ~ path:', { path })
+
   const fileUrl = await uploadFileToStorageByClient({
     bucket: USER_VIDEOS,
     file: body.file,
-    name: `${userId}/${Date.now()}_${body.file.name}`
+    name: path
   })
 
   const { error } = await createVideo({
@@ -24,9 +34,9 @@ export async function UploadVideo({ body, userId }: CreateJobParams): Promise<{
       description: body.description,
       skills: body.skills,
       title: body.title,
-      video_url: fileUrl as string,
-      id: body.id
-    }
+      video_url: fileUrl as string
+      // id: body.id
+    } as any
   })
 
   console.log({

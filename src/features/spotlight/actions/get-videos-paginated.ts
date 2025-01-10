@@ -6,10 +6,16 @@ import { UserVideo } from '../types'
 export async function getVideosPaginated({
   limit,
   page,
-  userId
+  userId,
+  credentials = [],
+  skillTrades = [],
+  skills = []
 }: {
   limit: number
   page: number
+  credentials?: string[]
+  skills?: string[]
+  skillTrades?: string[]
   userId?: string
 }): Promise<{
   data: UserVideo[]
@@ -18,18 +24,18 @@ export async function getVideosPaginated({
   const supabase = await createServerClient()
 
   const userFilter = userId ? `&user-id=${userId}` : ''
+  const credentialsFilter = credentials?.length
+    ? `&credentials=${credentials.join(',')}`
+    : ''
+  const skillsFilter = skills?.length ? `&skills=${skills.join(',')}` : ''
+  const skillTradesFilter = skillTrades?.length
+    ? `&trades=${skillTrades.join(',')}`
+    : ''
 
-  const { data, error } = await supabase.functions.invoke(
-    `user-videos-get?limit=${limit}&page=${page}${userFilter}`,
-    {
-      method: 'GET'
-    }
-  )
+  const url = `user-videos-get?limit=${limit}&page=${page}${userFilter}${credentialsFilter}${skillsFilter}${skillTradesFilter}`
 
-  console.log({
-    cantidad: data.length,
-    page,
-    limit
+  const { data, error } = await supabase.functions.invoke(url, {
+    method: 'GET'
   })
 
   if (error) {

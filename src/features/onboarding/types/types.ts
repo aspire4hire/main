@@ -76,5 +76,6 @@ export interface Profile {
   is_profile_complete: boolean
   skilled_trades: SkillTrade[]
   credentials: Credential[]
+  province: Province
   companies?: Company[]
 }

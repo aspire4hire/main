@@ -29,14 +29,35 @@ const CheckboxBase = React.forwardRef<
 ))
 CheckboxBase.displayName = CheckboxPrimitive.Root.displayName
 
+// const Wrapper = ({
+//   label,
+//   children
+// }: {
+//   label: string
+//   children: React.ReactNode
+// }) => {
+//   if (!label) return <>{children}</>
+
+//   return (
+//     <Label>
+//       {children}
+//       {label}
+//     </Label>
+//   )
+// }
+
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(({ className, label, ...props }, ref) => {
+>(({ className, classNameLabel, label, ...props }, ref) => {
   return (
     <div className="flex items-center gap-2">
       <CheckboxBase ref={ref} {...props} className={className} />
-      {label && <Label htmlFor="checkbox-01">{label}</Label>}
+      {label && (
+        <Label htmlFor="checkbox-01" className={classNameLabel}>
+          {label}
+        </Label>
+      )}
     </div>
   )
 })

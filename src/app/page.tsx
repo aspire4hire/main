@@ -1,5 +1,8 @@
 import { AppLayout, Typography } from '@/components'
-import { FloatingNewVideoButton } from '@/features/spotlight/components'
+import {
+  FloatingNewVideoButton,
+  SpotlightFilters
+} from '@/features/spotlight/components'
 import { VideoPostsList } from '@/features/spotlight/components/VideoPostsList/VideoPostsList'
 
 export default async function Home() {
@@ -15,10 +18,13 @@ export default async function Home() {
         <Typography variant="h2" className="mb-0 text-2xl font-bold">
           Spotlight
         </Typography>
-        <Typography className="mb-5 text-black">
+        <Typography className="text-black">
           Explore top trades talent through video showcases. Filter by trade,
           skill, and certifications to find your perfect match.
         </Typography>
+        <div className="mb-5 mt-3">
+          <SpotlightFilters />
+        </div>
         <VideoPostsList />
       </div>
     </AppLayout>
