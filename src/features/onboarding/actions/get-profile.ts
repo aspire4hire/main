@@ -20,10 +20,6 @@ export async function getUserProfile({
     }
   )
 
-  console.log('PROFILE: ', {
-    data
-  })
-
   const profile = Array.isArray(data) ? data[0] : data
 
   if (error || !profile) {

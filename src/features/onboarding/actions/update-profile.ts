@@ -3,6 +3,7 @@ import { createServerClient } from '@/lib/supabase-server'
 import { OnboardingFormDto, Profile } from '../types'
 import { uploadFileToStorage } from '@/features/common'
 import { COMPANY_LOGOS, PROFILE_PICS, RESUMES } from '@/constants/storage'
+import { normalizeUrl } from '@/utils'
 
 type UpdateProfileParams = {
   body: OnboardingFormDto
@@ -54,10 +55,10 @@ export async function updateProfile({ body }: UpdateProfileParams): Promise<{
       description: body.description,
       why_work_with_us: body.why_work_with_us,
       logo_url: logoPic,
-      website_url: body.website_url,
+      website_url: normalizeUrl(body.website_url),
       address: body.address,
       is_admin: true,
-      company_role: 'b566aef7-f859-4019-827e-c2602659204b'
+      company_role: '65f5eaa9-0fef-46c2-91c9-f6a321619537'
     }
   ]
 

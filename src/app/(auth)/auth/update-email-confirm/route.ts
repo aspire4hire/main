@@ -10,19 +10,18 @@ export async function GET(request: NextRequest) {
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
 
-  console.log({ token_hash, type })
-
   const next = ROUTES.SUCCESS_CHANGE_EMAIL
 
   if (token_hash && type) {
     const supabase = await createServerClient()
 
-    const { data, error } = await supabase.auth.verifyOtp({
-      type,
+    const { error } = await supabase.auth.verifyOtp({
+      type: 'email_change',
       token_hash
     })
 
     if (!error) {
+      console.log(error)
       // redirect user to specified redirect URL or root of app
       redirect(next)
     }

@@ -4,7 +4,6 @@ import { InfiniteScroll, JobPosting } from '@/components'
 import React from 'react'
 import { getVideosPaginated } from '../../actions'
 import { UserVideo } from '../../types'
-import { Loader2 } from 'lucide-react'
 import { useSpotlightStateStoreStore } from '../../store'
 import { JobPostingLoader } from '@/components/Feed/JobPosting/JobPostingLoader'
 

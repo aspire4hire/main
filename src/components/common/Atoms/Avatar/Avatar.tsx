@@ -9,15 +9,18 @@ import { AVATAR_SIZE } from './constants'
 import { ProfileIcon } from '../icons'
 import { IconSizeEnum } from '../icons/types'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const AvatarWrapper = ({
   href,
   children,
-  justClickable
+  justClickable,
+  prefetch
 }: {
   href?: string
   justClickable?: boolean
   children: React.ReactNode
+  prefetch?: boolean
 }) => {
   if (!href)
     return <div className={'flex w-fit items-center gap-1'}>{children}</div>
@@ -42,7 +45,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   src,
   name,
   href,
-  justClickable
+  justClickable,
+  prefetch
 }) => {
   const [hasError, setHasError] = useState(false)
   const sizeClass = size !== AvatarSizeEnum.CUSTOM ? AVATAR_SIZE[size] : ''
@@ -64,6 +68,7 @@ export const Avatar: React.FC<AvatarProps> = ({
     <AvatarWrapper
       href={name && !hasError && href ? href : undefined}
       justClickable={justClickable}
+      prefetch={prefetch}
     >
       <div className="h-fit w-fit overflow-hidden rounded-full drop-shadow-lg">
         {hasError || !src ? (
@@ -76,11 +81,15 @@ export const Avatar: React.FC<AvatarProps> = ({
             <ProfileIcon className="text-white" size={iconSize} />
           </div>
         ) : (
-          <img
+          <Image
             src={src}
             className={className}
             alt="avatar"
             onError={() => setHasError(true)}
+            width={10000}
+            height={10000}
+            loading="eager"
+            placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAAACrCAMAAAATgapkAAAAA1BMVEW1tbVGVhzfAAAASElEQVR4nO3BMQEAAADCoPVPbQZ/oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+A8W4AAH7AbJ4AAAAAElFTkSuQmCC"
           />
         )}
       </div>

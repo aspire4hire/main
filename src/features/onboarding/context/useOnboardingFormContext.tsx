@@ -71,7 +71,6 @@ const OnboardingFormProvider = ({
   company?: Company
   isCompany?: boolean
 }) => {
-  console.log(company)
   const getInitialStepPosition = () => {
     if (isEditing) {
       return StepPositionEnum.BASIC_INFORMATION

@@ -41,6 +41,32 @@ export const CompanyOverview = ({
           </button>
         )}
       </div>
+      <Typography
+        variant="p"
+        className="w-full text-left text-tertiary"
+        weight="bold"
+      >
+        Address:{' '}
+        <Typography variant="span" className="ml-1 font-medium text-primary">
+          {company.address}
+        </Typography>
+      </Typography>
+      <Typography
+        variant="p"
+        className="w-full text-left text-tertiary"
+        weight="bold"
+      >
+        Website:{' '}
+        {company.website_url && (
+          <a
+            href={company.website_url}
+            target="_blank"
+            className="ml-1 font-medium text-primary underline"
+          >
+            {company.website_url}
+          </a>
+        )}
+      </Typography>
       <TextEditorPreview content={company.description} title="About us" />
       <TextEditorPreview
         content={company.why_work_with_us}

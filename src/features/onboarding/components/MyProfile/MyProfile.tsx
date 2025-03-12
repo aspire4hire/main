@@ -7,12 +7,10 @@ import {
   CompanyIcon,
   EditIcon,
   IconSizeEnum,
-  Skeleton,
   SkillTrade,
   Typography
 } from '@/components'
 import React from 'react'
-import { useProvinces } from '../../hooks'
 import { Profile } from '../../types'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
@@ -23,11 +21,13 @@ import { MailIcon } from 'lucide-react'
 type MyProfileProps = {
   profile: Profile
   isExternalView?: boolean
+  isLookingOtherJobSeeker?: boolean
 }
 
 export const MyProfile = ({
   profile,
-  isExternalView = false
+  isExternalView = false,
+  isLookingOtherJobSeeker = false
 }: MyProfileProps) => {
   const router = useRouter()
 
@@ -81,19 +81,23 @@ export const MyProfile = ({
             Edit Profile
           </Button>
         ) : (
-          <Button
-            variant={'ghostSecondary'}
-            rounded
-            className="mt-4 text-sm font-bold text-primary"
-            size={'xxl'}
-            onClick={() => {
-              const mailtoLink = `mailto:${profile.email_address}`
-              window.location.href = mailtoLink
-            }}
-          >
-            <MailIcon />
-            Contact
-          </Button>
+          <>
+            {!isLookingOtherJobSeeker && (
+              <Button
+                variant={'ghostSecondary'}
+                rounded
+                className="mt-4 text-sm font-bold text-primary"
+                size={'xxl'}
+                onClick={() => {
+                  const mailtoLink = `mailto:${profile.email_address}`
+                  window.location.href = mailtoLink
+                }}
+              >
+                <MailIcon />
+                Contact
+              </Button>
+            )}
+          </>
         )}
       </div>
       <div className="mb-8 mt-3 h-[2px] w-full bg-primary"></div>
@@ -110,7 +114,10 @@ export const MyProfile = ({
           />
         </div>
       ) : (
-        <JobSekeerProfileDetails profile={profile} />
+        <JobSekeerProfileDetails
+          profile={profile}
+          hideResume={isLookingOtherJobSeeker}
+        />
       )}
     </>
   )

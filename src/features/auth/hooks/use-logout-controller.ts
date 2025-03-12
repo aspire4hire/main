@@ -1,13 +1,9 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { getLogout } from '../actions'
-import { useRouter } from 'next/navigation'
-import { ROUTES } from '@/constants'
 
 const useLoguotController = () => {
   const [isLoading, setIsLoading] = useState(false)
-
-  const router = useRouter()
 
   const handleLogOut = async () => {
     setIsLoading(true)
@@ -20,7 +16,7 @@ const useLoguotController = () => {
       setIsLoading(false)
       return
     }
-    router.push(ROUTES.LOGIN)
+    location.reload()
   }
 
   return {

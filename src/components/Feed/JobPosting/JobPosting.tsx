@@ -82,15 +82,12 @@ export const JobPosting = ({
       <div className="grid grid-cols-3">
         <div className="col-span-2 pr-3">
           <Avatar
-            href={
-              (profile?.is_employer &&
-                ROUTES.JOB_SEEKER_PROFILE({ id: user.id })) ||
-              undefined
-            }
+            href={ROUTES.JOB_SEEKER_PROFILE({ id: user.id })}
             justClickable
             name={user.name}
             src={user.avatar}
             size={AvatarSizeEnum.XS}
+            prefetch
           />
           <Typography variant="h6" className="font-bold">
             {title}

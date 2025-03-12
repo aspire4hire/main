@@ -1,6 +1,7 @@
 import { AppLayout } from '@/components'
 import { JobDetail } from '@/features/jobs'
 import { getJobPost } from '@/features/jobs/actions'
+import { JobLoadingPage } from '@/features/jobs/components'
 
 export default async function EditCompay({
   params,
@@ -12,10 +13,9 @@ export default async function EditCompay({
   const { id } = await params
 
   const { data } = await getJobPost({ id: id as string })
-  console.log('🚀 ~ data:', data)
 
   return (
-    <AppLayout>
+    <AppLayout loaderComponent={<JobLoadingPage />}>
       <JobDetail job={data} isJobSeekerView />
     </AppLayout>
   )

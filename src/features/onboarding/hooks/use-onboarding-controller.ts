@@ -47,7 +47,7 @@ const useOnboardingController = () => {
       callback?.()
 
       if (redirect) {
-        router.push(ROUTES.MY_PROFILE)
+        router.push(ROUTES.HOME + `?onboarding=true`)
         return
       }
 

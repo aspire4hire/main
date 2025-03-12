@@ -3,6 +3,7 @@ import { createServerClient } from '@/lib/supabase-server'
 import { uploadFileToStorage } from '@/features/common'
 import { Company } from '../types'
 import { COMPANY_LOGOS } from '@/constants/storage'
+import { normalizeUrl } from '@/utils'
 
 type UpdateCompanyParams = {
   body: Partial<Company>
@@ -30,7 +31,7 @@ export async function updateCompany({ body }: UpdateCompanyParams) {
     ...(body.description && { description: body.description }),
     ...(body.why_work_with_us && { why_work_with_us: body.why_work_with_us }),
     ...(logoPic && { logo_url: logoPic }),
-    ...(body.website_url && { website_url: body.website_url }),
+    ...(body.website_url && { website_url: normalizeUrl(body.website_url) }),
     ...(body.address && { address: body.address })
   }
 

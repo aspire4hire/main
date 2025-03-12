@@ -23,6 +23,7 @@ export const NavItem = ({
   return (
     <Link
       href={href}
+      prefetch
       className="w-full flex-1 py-2 transition-all duration-300 hover:bg-primary/10"
     >
       <div className="flex flex-col items-center justify-center gap-1">

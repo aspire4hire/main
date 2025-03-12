@@ -10,7 +10,7 @@ import {
 } from '@/components'
 import { ROUTES } from '@/constants'
 import { useLoguotController } from '@/features/auth/hooks'
-import { LogOut } from 'lucide-react'
+import { LogOut, MessageSquareText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export default function Settings() {
@@ -26,6 +26,16 @@ export default function Settings() {
         Settings
       </Typography>
       <div className="flex flex-col gap-4">
+        <Button
+          variant={'primaryWithSecondary'}
+          className="flex justify-between"
+          onClick={() => window.open('mailto:6KXeD@example.com')}
+        >
+          <MessageSquareText width={32} height={32} />
+          <Typography className="ml-0 w-full text-left font-bold text-white">
+            Submit an inquiry or report a bug
+          </Typography>
+        </Button>
         <Button
           variant={'outline'}
           className="flex justify-between bg-tertiary/20"

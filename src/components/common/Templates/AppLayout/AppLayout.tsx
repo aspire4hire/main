@@ -13,7 +13,7 @@ const items = [
   {
     href: '/',
     icon: { element: ComunityIcon },
-    title: 'Spotlight',
+    title: 'Talent',
     exactlyRoute: true,
     access: [USER_TYPES.EMPLOYER, USER_TYPES.JOBSEEKER]
   },
@@ -46,6 +46,7 @@ type AppLayoutProps = {
   hideTopNav?: boolean
   hideBottomBar?: boolean
   className?: HTMLElement['className']
+  loaderComponent?: React.ReactNode
 }
 
 export const AppLayout = ({
@@ -55,7 +56,8 @@ export const AppLayout = ({
   backButton = true,
   hideTopNav = false,
   hideBottomBar = false,
-  className
+  className,
+  loaderComponent
 }: AppLayoutProps) => {
   const { profile, setCurrentSessionState } = useCurrentSessionStore()
 
@@ -100,7 +102,7 @@ export const AppLayout = ({
   )
 
   if (isLoading) {
-    return <PageLoader />
+    return loaderComponent ?? <PageLoader />
   }
 
   return (

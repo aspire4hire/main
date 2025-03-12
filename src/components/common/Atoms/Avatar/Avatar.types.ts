@@ -7,4 +7,5 @@ export type AvatarProps = {
   name?: string
   href?: string
   justClickable?: boolean
+  prefetch?: boolean
 }

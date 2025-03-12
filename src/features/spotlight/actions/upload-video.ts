@@ -21,8 +21,6 @@ export async function UploadVideo({ body, userId }: CreateJobParams): Promise<{
 
   const path = `${userId}/${year}/${month}/${day}/${Date.now()}_${body.file.name}`
 
-  console.log('🚀 ~ UploadVideo ~ path:', { path })
-
   const fileUrl = await uploadFileToStorageByClient({
     bucket: USER_VIDEOS,
     file: body.file,
