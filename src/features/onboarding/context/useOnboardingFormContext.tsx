@@ -151,6 +151,11 @@ const OnboardingFormProvider = ({
           redirect: true
         }
       }
+    } else if (
+      isEditing &&
+      stepPosition === StepPositionEnum.BASIC_INFORMATION
+    ) {
+      options = { ...options, showVideo: false }
     }
 
     const dataUpdated = StepPositionEnum.DETAILED_INFORMATION

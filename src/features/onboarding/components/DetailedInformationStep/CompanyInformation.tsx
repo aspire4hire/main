@@ -101,6 +101,7 @@ export const CompanyInformation = () => {
               {...field}
               value={field.value ?? undefined}
               label="Company Website URL"
+              description="The URL must begin with https://"
               placeholder="Type company address here..."
               error={getFormError(errors, field.name)}
             />

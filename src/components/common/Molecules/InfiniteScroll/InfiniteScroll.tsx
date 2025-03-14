@@ -1,6 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import React, { useRef, useEffect, useState } from 'react'
+import { Typography } from '../../Atoms'
 
 type InfiniteScrollProps<T> = {
   fetchData: (
@@ -15,6 +17,7 @@ type InfiniteScrollProps<T> = {
   className?: HTMLElement['className']
   otherFilters?: string[]
   extraFilters?: object
+  emptyMessage?: React.ReactNode
 }
 
 const InfiniteScroll = <T,>({
@@ -23,6 +26,7 @@ const InfiniteScroll = <T,>({
   limit = 10,
   loader = <p>Loading...</p>,
   noMoreDataMessage = <p>No more data</p>,
+  emptyMessage,
   className,
   otherFilters,
   extraFilters = {}
@@ -84,6 +88,7 @@ const InfiniteScroll = <T,>({
 
   return (
     <div className={className}>
+      {!isLoading && !data.length && emptyMessage ? emptyMessage : null}
       {data.map(renderItem)}
       {isLoading && loader}
       <div ref={observerRef}></div>

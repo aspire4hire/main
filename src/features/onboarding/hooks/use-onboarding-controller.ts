@@ -10,6 +10,7 @@ type SubmitParams = {
   callback?: () => void
   redirect?: boolean
   setLoadingAsFalse?: boolean
+  showVideo?: boolean
 }
 
 const useOnboardingController = () => {
@@ -20,9 +21,15 @@ const useOnboardingController = () => {
 
   const onSubmit = async (
     data: OnboardingFormDto,
-    { callback, redirect = true, setLoadingAsFalse = false }: SubmitParams = {
+    {
+      callback,
+      redirect = true,
+      setLoadingAsFalse = false,
+      showVideo = true
+    }: SubmitParams = {
       redirect: true,
-      setLoadingAsFalse: false
+      setLoadingAsFalse: false,
+      showVideo: true
     }
   ) => {
     setIsLoading(true)
@@ -47,7 +54,8 @@ const useOnboardingController = () => {
       callback?.()
 
       if (redirect) {
-        router.push(ROUTES.HOME + `?onboarding=true`)
+        const showOnboardingVideo = showVideo ? '?onboarding=true' : ''
+        router.push(ROUTES.HOME + showOnboardingVideo)
         return
       }
 

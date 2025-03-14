@@ -1,11 +1,12 @@
 'use client'
 
-import { InfiniteScroll, JobPosting } from '@/components'
+import { InfiniteScroll, JobPosting, Typography } from '@/components'
 import React from 'react'
 import { getVideosPaginated } from '../../actions'
 import { UserVideo } from '../../types'
 import { useSpotlightStateStoreStore } from '../../store'
 import { JobPostingLoader } from '@/components/Feed/JobPosting/JobPostingLoader'
+import Image from 'next/image'
 
 export const VideoPostsList = () => {
   const { filter } = useSpotlightStateStoreStore()
@@ -31,6 +32,18 @@ export const VideoPostsList = () => {
             <JobPostingLoader key={index} />
           ))}
         </>
+      }
+      emptyMessage={
+        <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3">
+          <Image
+            src={'/assets/empty_icon.png'}
+            alt="empty icon"
+            width={1200}
+            height={1200}
+            className="w-20"
+          />
+          <Typography weight="bold">No video posted yet</Typography>
+        </div>
       }
       otherFilters={[
         ...filter.credentials,

@@ -29,7 +29,7 @@ export default function Settings() {
         <Button
           variant={'primaryWithSecondary'}
           className="flex justify-between"
-          onClick={() => window.open('mailto:6KXeD@example.com')}
+          onClick={() => window.open('mailto:info@a4hskillslab.ca')}
         >
           <MessageSquareText width={32} height={32} />
           <Typography className="ml-0 w-full text-left font-bold text-white">
