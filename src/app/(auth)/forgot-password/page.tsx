@@ -1,5 +1,6 @@
 import { Typography } from '@/components'
 import { ForgotPasswordForm } from '@/features/auth'
+import { Suspense } from 'react'
 
 export default function ForgotPassword() {
   return (
@@ -17,7 +18,9 @@ export default function ForgotPassword() {
             >
               Enter your email to reset it!
             </Typography>
-            <ForgotPasswordForm />
+            <Suspense>
+              <ForgotPasswordForm />
+            </Suspense>
           </div>
         </div>
       </div>
