@@ -24,7 +24,7 @@ const useRequestForgotPasswordController = () => {
     setIsLoading(true)
     const { error } = await requestForgotPassword(
       data,
-      `${window.location.origin}/reset-password`
+      `http://localhost:3000/reset-password`
     )
 
     if (error) {

@@ -15,7 +15,8 @@ const useResetPassword = () => {
   })
 
   const onSubmit = async (data: ResetPasswordDto) => {
-    const { error } = await resetPassword(data)
+    const { error, data: repnose } = await resetPassword(data)
+    console.log('🚀 ~ onSubmit ~ repnose:', repnose, error)
 
     setIsLoading(false)
     if (error) {

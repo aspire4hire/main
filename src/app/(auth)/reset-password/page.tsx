@@ -1,5 +1,5 @@
 import { Typography } from '@/components'
-import { ResetPasswordForm } from '@/features/auth/components/ResetPasswordForm/ResetPasswordForm'
+import { ResetPasswordForm } from '@/features/auth'
 
 const ResetPasswordPage = () => {
   return (
