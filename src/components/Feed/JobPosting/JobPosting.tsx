@@ -92,7 +92,9 @@ export const JobPosting = ({
           <Typography variant="h6" className="font-bold">
             {title}
           </Typography>
-          <Typography variant="p">{description}</Typography>
+          <Typography variant="p" className="break-words">
+            {description}
+          </Typography>
         </div>
         <div className="col-span-1 flex justify-end">
           <VideoThumbnail playback_id={playback_id} />

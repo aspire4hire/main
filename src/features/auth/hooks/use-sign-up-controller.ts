@@ -20,6 +20,7 @@ const useSignUpController = () => {
           position: 'top-center'
         }
       )
+      setIsLoading(false)
       return
     }
 

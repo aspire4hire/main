@@ -15,3 +15,8 @@ export interface ChangeEmailDto {
 export interface UpdatePassword {
   password: string
 }
+
+export interface ResetPasswordDto {
+  password: string
+  confirmPassword: string
+}

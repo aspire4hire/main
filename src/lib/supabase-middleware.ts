@@ -49,6 +49,8 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith(ROUTES.LOGIN) &&
     !request.nextUrl.pathname.startsWith(ROUTES.SIGN_UP) &&
     !request.nextUrl.pathname.startsWith(ROUTES.EMAIL_VERIFICATION) &&
+    !request.nextUrl.pathname.startsWith(ROUTES.FORGOT_PASSWORD) &&
+    !request.nextUrl.pathname.startsWith(ROUTES.RESET_PASSWORD) &&
     !request.nextUrl.pathname.startsWith('/auth/confirm')
   ) {
     // no user, potentially respond by redirecting the user to the login page
@@ -61,6 +63,8 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith(ROUTES.LOGIN) &&
     !request.nextUrl.pathname.startsWith(ROUTES.SIGN_UP) &&
     !request.nextUrl.pathname.startsWith(ROUTES.EMAIL_VERIFICATION) &&
+    !request.nextUrl.pathname.startsWith(ROUTES.FORGOT_PASSWORD) &&
+    !request.nextUrl.pathname.startsWith(ROUTES.RESET_PASSWORD) &&
     !request.nextUrl.pathname.startsWith('/auth/confirm')
   ) {
     const { data } = await supabase
