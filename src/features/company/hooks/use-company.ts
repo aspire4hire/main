@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react'
 import { getCompany } from '../api/get-company'
 import { getCompanyJobs } from '@/features/jobs/actions'
