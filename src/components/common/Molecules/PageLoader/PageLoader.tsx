@@ -1,18 +1,18 @@
-import { Loader2 } from "lucide-react";
-import React from "react";
+import { Loader2 } from 'lucide-react'
+import React from 'react'
 
 export interface PageLoaderProps {
-  message?: string;
+  message?: string
 }
 
 const PageLoader: React.FC<PageLoaderProps> = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90 z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
       <div className="text-center">
-        <Loader2 className="animate-spin text-primary w-12 h-12" />
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { PageLoader };
+export { PageLoader }

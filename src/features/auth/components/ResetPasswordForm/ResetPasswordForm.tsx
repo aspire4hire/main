@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { ROUTES } from '@/constants'
 
 export const ResetPasswordForm = () => {
-  const { form, onSubmit } = useResetPassword()
+  const { form, onSubmit, isLoading } = useResetPassword()
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -58,7 +58,7 @@ export const ResetPasswordForm = () => {
         />
       </div>
       <div className="mt-5 flex flex-col gap-3">
-        <Button type="submit" isLoading={false} fullWidth size={'lg'}>
+        <Button type="submit" isLoading={isLoading} fullWidth size={'lg'}>
           CONFIRM
         </Button>
         <Typography variant="body2">

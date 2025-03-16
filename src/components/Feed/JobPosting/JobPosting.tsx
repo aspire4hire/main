@@ -23,6 +23,8 @@ import { VideoThumbnail } from '@/features/spotlight/components'
 import { Trash2Icon } from 'lucide-react'
 import { useCurrentSessionStore } from '@/features/auth'
 import { useRouter } from 'next/navigation'
+import { deleteVideo } from '@/features/spotlight/actions'
+import { toast } from 'sonner'
 
 export const JobPosting = ({
   date,
@@ -31,10 +33,12 @@ export const JobPosting = ({
   title,
   user,
   playback_id,
-  id
+  id,
+  onDeleteVideo
 }: JobPostingProps) => {
   const router = useRouter()
   const { profile } = useCurrentSessionStore()
+
   return (
     <article className="w-full space-y-3 rounded-lg border border-tertiary/5 bg-[#F1F1F1] px-3 py-3 shadow-md">
       <div className="flex w-full justify-between">
@@ -64,7 +68,7 @@ export const JobPosting = ({
                 </Typography>
               </button>
               <button
-                onClick={() => {}}
+                onClick={() => onDeleteVideo?.(id)}
                 className="flex w-full items-center gap-1 p-3 transition-all hover:bg-tertiary/10"
               >
                 <Trash2Icon className="!h-5 !w-5 font-semibold text-destructive" />

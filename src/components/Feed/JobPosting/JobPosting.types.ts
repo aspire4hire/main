@@ -10,6 +10,7 @@ type JobPostingProps = {
     id: string
   }
   playback_id: string
+  onDeleteVideo?: (id: string) => void
 }
 
 export type { JobPostingProps }

@@ -4,8 +4,12 @@ import { toast } from 'sonner'
 
 import { ResetPasswordDto } from '../types'
 import { resetPassword } from '../actions'
+import { useRouter } from 'next/navigation'
+import { ROUTES } from '@/constants'
 
 const useResetPassword = () => {
+  const router = useRouter()
+
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<ResetPasswordDto>({
     defaultValues: {
@@ -15,24 +19,22 @@ const useResetPassword = () => {
   })
 
   const onSubmit = async (data: ResetPasswordDto) => {
-    const { error, data: repnose } = await resetPassword(data)
-    console.log('🚀 ~ onSubmit ~ repnose:', repnose, error)
+    setIsLoading(true)
+    const { data: response, error } = await resetPassword(data)
 
-    setIsLoading(false)
+    if (response) {
+      toast.success('Password reset successfully', {
+        position: 'top-center',
+        duration: 6000
+      })
+      router.push(`${ROUTES.LOGIN}`)
+    }
     if (error) {
       toast.error('We are unable to process your request. Please try again.', {
         position: 'top-center'
       })
-      return
+      setIsLoading(false)
     }
-
-    form.reset({
-      confirmPassword: '',
-      password: ''
-    })
-    toast.success('Password reset successfully', {
-      position: 'top-center'
-    })
   }
 
   return {

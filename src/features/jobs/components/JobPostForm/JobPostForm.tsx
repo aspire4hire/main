@@ -61,6 +61,7 @@ export const JobPostForm = ({ isEditing, data }: JobPostFormProps) => {
   return (
     <FormContainer
       onSubmit={form.handleSubmit(data => onSubmit(data))}
+      className="max-h-[100dvh] overflow-hidden"
       submitButton={
         <>
           <CheckIcon size={IconSizeEnum.SM} />
@@ -190,69 +191,74 @@ export const JobPostForm = ({ isEditing, data }: JobPostFormProps) => {
             />
           )}
         />
-        <Controller
-          control={form.control}
-          name="skilled_trades"
-          rules={{
-            validate: {
-              required: value =>
-                value.length > 0 || 'Please select at least one trade'
-            }
-          }}
-          render={({ field }) => (
-            <div>
-              <Label className="text-tertiary">
-                Skilled Trade <span className="text-destructive">*</span>
-              </Label>
-              <DescriptionAsLabel description="Select which trade this job is for." />
-              <div className="mt-5 flex flex-col gap-3">
-                {isLoadingSkillTrades && (
-                  <>
-                    {Array.from({ length: 3 }).map((_, i) => (
-                      <div className="flex items-center gap-2" key={i}>
-                        <Skeleton className="h-6 w-7" />
-                        <Skeleton className="h-5 w-28" />
-                        <div className="ml-5">
-                          <Skeleton className="h-6 w-6" />
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                )}
-                {skillTrades.map(skillTrade => (
-                  <div key={skillTrade.id} className="flex items-center gap-2">
-                    <div className="flex w-36 max-w-36 items-center gap-2">
-                      <img
-                        src={skillTrade.trade_icon}
-                        alt={skillTrade.trade_name}
-                        className="w-8 rounded-full"
-                      />
-                      <Typography variant="p" className="text-base">
-                        {skillTrade.trade_name}
-                      </Typography>
+        <div>
+          <Label className="text-tertiary">
+            Skilled Trade <span className="text-destructive">*</span>
+          </Label>
+          <DescriptionAsLabel description="Select which trade this job is for." />
+          <div className="mt-5 flex flex-col gap-3">
+            {isLoadingSkillTrades && (
+              <>
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div className="flex items-center gap-2" key={i}>
+                    <Skeleton className="h-6 w-7" />
+                    <Skeleton className="h-5 w-28" />
+                    <div className="ml-5">
+                      <Skeleton className="h-6 w-6" />
                     </div>
-                    <Checkbox
-                      checked={form
-                        .watch('skilled_trades')
-                        ?.includes(skillTrade.id as any)}
-                      onCheckedChange={() =>
-                        handleChangeSkillTrade(
-                          skillTrade.id as any,
-                          field.onChange
-                        )
-                      }
-                    />
                   </div>
                 ))}
-                {getFormError(form.formState?.errors, field.name) && (
-                  <ErrorField
-                    error={getFormError(form.formState?.errors, field.name)}
-                  />
+              </>
+            )}
+            <div className="flex flex-col gap-3">
+              <Controller
+                control={form.control}
+                name="skilled_trades"
+                rules={{
+                  validate: {
+                    required: value =>
+                      value.length > 0 || 'Please select at least one trade'
+                  }
+                }}
+                render={({ field }) => (
+                  <>
+                    {skillTrades.map((skillTrade, idx) => (
+                      <div key={idx} className="flex items-center gap-5">
+                        <div className="flex w-36 max-w-36 items-center gap-2">
+                          <img
+                            src={skillTrade.trade_icon}
+                            alt={skillTrade.trade_name}
+                            className="w-8 rounded-full"
+                          />
+                          <Typography variant="p" className="text-base">
+                            {skillTrade.trade_name}
+                          </Typography>
+                        </div>
+                        <Checkbox
+                          checked={form
+                            .watch('skilled_trades')
+                            ?.includes(skillTrade.id as any)}
+                          onCheckedChange={() =>
+                            handleChangeSkillTrade(
+                              skillTrade.id as any,
+                              field.onChange
+                            )
+                          }
+                          className=""
+                        />
+                      </div>
+                    ))}
+                    {getFormError(form.formState?.errors, field.name) && (
+                      <ErrorField
+                        error={getFormError(form.formState?.errors, field.name)}
+                      />
+                    )}
+                  </>
                 )}
-              </div>
+              />
             </div>
-          )}
-        />
+          </div>
+        </div>
         <Controller
           name="skills"
           control={form.control}

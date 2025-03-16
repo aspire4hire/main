@@ -1,24 +1,22 @@
+'use client'
+
+import { useParams } from 'next/navigation'
+
 import { AppLayout } from '@/components'
-import { CompanyDetailPage } from '@/features/company'
-import { getCompanyJobs } from '@/features/jobs/actions'
+import { CompanyDetailPage, useCompany } from '@/features/company'
+import { CompanyDetailSkeleton } from '@/features/company/components'
 
-import { getCompany } from '@/features/onboarding/actions'
-
-export default async function EditCompay({
-  params
-}: {
-  params: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
-  const { id } = await params
-
-  const [{ data }, { data: jobs }] = await Promise.all([
-    getCompany({ id: id as string }),
-    getCompanyJobs({ companyId: id as string })
-  ])
+export default function EditCompay() {
+  const { id } = useParams()
+  const { data, isLoading } = useCompany({ id: id as string })
 
   return (
     <AppLayout hideTopNav backButton={false}>
-      <CompanyDetailPage jobs={jobs} company={data} />
+      {isLoading || !data.company ? (
+        <CompanyDetailSkeleton />
+      ) : (
+        <CompanyDetailPage jobs={data.jobs} company={data.company} />
+      )}
     </AppLayout>
   )
 }
