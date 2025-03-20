@@ -35,7 +35,10 @@ export const CompanyProfileDetails = ({
         >
           <div className="flex items-center gap-2">
             <img
-              src={company.logo_url || ''}
+              src={company.logo_url || '/assets/company_default.png'}
+              onError={e => {
+                e.currentTarget.src = '/assets/company_default.png'
+              }}
               className="h-8 w-8 rounded-full object-cover"
               alt="company logo"
             />
@@ -75,7 +78,7 @@ export const CompanyProfileDetails = ({
                   </Typography>
                 </button>
               )}
-              {onDelete && (
+              {/* {onDelete && (
                 <button
                   onClick={() => onDelete(company)}
                   className="flex w-full items-center gap-1 p-3 transition-all hover:bg-tertiary/10"
@@ -88,7 +91,7 @@ export const CompanyProfileDetails = ({
                     Delete Company
                   </Typography>
                 </button>
-              )}
+              )} */}
             </PopoverContent>
           </Popover>
         </div>

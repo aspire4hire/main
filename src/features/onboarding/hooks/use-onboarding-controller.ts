@@ -11,6 +11,7 @@ type SubmitParams = {
   redirect?: boolean
   setLoadingAsFalse?: boolean
   showVideo?: boolean
+  redirectTo?: string
 }
 
 const useOnboardingController = () => {
@@ -25,7 +26,8 @@ const useOnboardingController = () => {
       callback,
       redirect = true,
       setLoadingAsFalse = false,
-      showVideo = true
+      showVideo = true,
+      redirectTo
     }: SubmitParams = {
       redirect: true,
       setLoadingAsFalse: false,
@@ -55,7 +57,8 @@ const useOnboardingController = () => {
 
       if (redirect) {
         const showOnboardingVideo = showVideo ? '?onboarding=true' : ''
-        router.push(ROUTES.HOME + showOnboardingVideo)
+        const redirectRoute = redirectTo ?? ROUTES.HOME
+        router.push(redirectRoute + showOnboardingVideo)
         return
       }
 

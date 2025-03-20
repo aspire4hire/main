@@ -18,13 +18,15 @@ type OnboardingFormProps = {
   data?: Profile | null
   company?: Company
   isCompany?: boolean
+  isCreateCompany?: boolean
 }
 
 export const OnboardingForm = ({
   isEditing,
   data = null,
   company,
-  isCompany
+  isCompany,
+  isCreateCompany = false
 }: OnboardingFormProps) => {
   const { data: skillsTrades } = useSkillTrades()
   const { data: provinces } = useProvinces()
@@ -45,6 +47,7 @@ export const OnboardingForm = ({
       data={data}
       company={company}
       isCompany={isCompany}
+      isCreateCompany={isCreateCompany}
     >
       {isLoading || isLoadingEdit ? <PageLoader /> : <OnboardingFormWrapper />}
     </OnboardingFormProvider>

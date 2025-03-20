@@ -56,6 +56,20 @@ export default function Settings() {
           </Typography>
           <ArrowRightIcon size={IconSizeEnum.SM} />
         </Button>
+        <Button
+          variant={'outline'}
+          className="flex justify-between bg-tertiary/20"
+          onClick={() =>
+            window.open(
+              'https://adcoiocsxshtcmzmxoyd.supabase.co/storage/v1/object/public/privacy-policy/privacy-policy.pdf'
+            )
+          }
+        >
+          <Typography className="ml-0 w-full text-left font-bold">
+            Privacy Policy
+          </Typography>
+          <ArrowRightIcon size={IconSizeEnum.SM} />
+        </Button>
       </div>
       <div className="mt-8 flex w-full justify-center">
         <Button

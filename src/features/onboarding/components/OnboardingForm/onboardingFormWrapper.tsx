@@ -9,9 +9,15 @@ import { DetailedInformationStep } from '../DetailedInformationStep'
 import { PageTransition } from '@/components'
 import { EditProfileForm } from './EditProfileForm'
 import { EditCompanyForm } from './EditCompanyForm'
+import { CreateCompanyForm } from './CreateCompanyForm'
 
 export const OnboardingFormWrapper = () => {
-  const { stepPosition, isEditing, isCompany } = useOnboardingFormContext()
+  const { stepPosition, isEditing, isCompany, isCreateCompany } =
+    useOnboardingFormContext()
+
+  if (isCreateCompany) {
+    return <CreateCompanyForm />
+  }
 
   if (isCompany && isEditing) {
     return <EditCompanyForm />

@@ -1,7 +1,7 @@
 import { AppLayout, EditButton } from '@/components'
 import { ROUTES } from '@/constants'
 
-import { JobDetail } from '@/features/jobs'
+import { JobDetail, JobDetailLoader } from '@/features/jobs'
 import { getJobApplicants, getJobPost } from '@/features/jobs/actions'
 
 export default async function JobPostCompanyPageDetail({
@@ -27,6 +27,8 @@ export default async function JobPostCompanyPageDetail({
         />
       }
       hideBottomBar
+      toBack={ROUTES.COMPANY_DETAILS({ id: String(id) })}
+      loaderComponent={<JobDetailLoader />}
     >
       <JobDetail job={data} applicants={applicants} />
     </AppLayout>

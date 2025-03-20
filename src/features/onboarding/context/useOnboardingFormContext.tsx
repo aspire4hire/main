@@ -17,6 +17,7 @@ import {
   EditProfileTabEnum
 } from '../types'
 import { Company } from '@/features/company'
+import { ROUTES } from '@/constants'
 
 type SubmitFunctionParams = {
   callback?: () => void
@@ -46,6 +47,7 @@ type IOnboardingFormContext = {
   currentEditProfileTabs: EditProfileTabEnum
   handleChangeTab: (tab: EditProfileTabEnum) => void
   isCompany?: boolean
+  isCreateCompany?: boolean
 }
 
 const OnboardingFormContext = createContext<IOnboardingFormContext>(undefined!)
@@ -59,7 +61,8 @@ const OnboardingFormProvider = ({
   isEditing,
   data,
   company,
-  isCompany
+  isCompany,
+  isCreateCompany
 }: {
   children: ReactNode
   onSubmit: OnBoardingSubmitType | EditCompanySubmitType
@@ -70,8 +73,11 @@ const OnboardingFormProvider = ({
   data?: Profile | null
   company?: Company
   isCompany?: boolean
+  isCreateCompany?: boolean
 }) => {
   const getInitialStepPosition = () => {
+    if (isCreateCompany) return StepPositionEnum.DETAILED_INFORMATION
+
     if (isEditing) {
       return StepPositionEnum.BASIC_INFORMATION
     }
@@ -155,12 +161,23 @@ const OnboardingFormProvider = ({
       isEditing &&
       stepPosition === StepPositionEnum.BASIC_INFORMATION
     ) {
-      options = { ...options, showVideo: false }
+      options = {
+        ...options,
+        showVideo: false,
+        redirectTo: ROUTES.MY_PROFILE
+      }
+    } else if (isCreateCompany) {
+      options = {
+        ...options,
+        showVideo: false,
+        redirectTo: ROUTES.HOME
+      }
     }
 
-    const dataUpdated = StepPositionEnum.DETAILED_INFORMATION
-      ? { ...data, is_profile_complete: true }
-      : data
+    const dataUpdated =
+      stepPosition === StepPositionEnum.DETAILED_INFORMATION
+        ? { ...data, is_profile_complete: true }
+        : data
 
     if (!isCompany) {
       const onSubmitData = onSubmit as OnBoardingSubmitType
@@ -188,7 +205,8 @@ const OnboardingFormProvider = ({
     isEditing,
     handleChangeTab,
     currentEditProfileTabs,
-    isCompany
+    isCompany,
+    isCreateCompany
   }
 
   return (
