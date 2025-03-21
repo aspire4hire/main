@@ -28,6 +28,7 @@ export const JobDetail = ({
         size={isJobSeekerView ? AvatarSizeEnum.XS : AvatarSizeEnum.LG}
         src={job?.company?.logo_url}
         name={job?.company?.name}
+        defaultImage="/assets/company_default.png"
         href={
           isJobSeekerView
             ? ROUTES.COMPANY_DETAILS_JOOB_SEEKER({ id: job?.company?.id })

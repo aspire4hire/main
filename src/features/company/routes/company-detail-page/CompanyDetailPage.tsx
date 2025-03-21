@@ -25,6 +25,7 @@ export const CompanyDetailPage = ({ company, jobs }: MyCompaniesPageProps) => {
           src={company.logo_url}
           name={company.name}
           size={AvatarSizeEnum.XS}
+          defaultImage="/assets/company_default.png"
           href={
             profile?.is_employer
               ? ROUTES.COMPANY_DETAILS({ id: company.id })

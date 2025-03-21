@@ -87,20 +87,16 @@ export const CompanyInformation = () => {
               return isValidURL(value) || 'Invalid URL'
             }
             return true
-          }
+          },
+          required: 'Company website URL is required'
         }}
         render={({ field }) => (
           <div className="relative w-full">
-            <Typography
-              variant="p"
-              className="absolute right-2 top-0 text-tertiary"
-            >
-              OPTIONAL
-            </Typography>
             <Input
               {...field}
               value={field.value ?? undefined}
               label="Company Website URL"
+              required
               description="The URL must begin with https://"
               placeholder="Type company address here..."
               error={getFormError(errors, field.name)}

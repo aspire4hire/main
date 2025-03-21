@@ -46,7 +46,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   name,
   href,
   justClickable,
-  prefetch
+  prefetch,
+  defaultImage
 }) => {
   const [hasError, setHasError] = useState(false)
   const sizeClass = size !== AvatarSizeEnum.CUSTOM ? AVATAR_SIZE[size] : ''
@@ -85,7 +86,14 @@ export const Avatar: React.FC<AvatarProps> = ({
             src={src}
             className={className}
             alt="avatar"
-            onError={() => setHasError(true)}
+            onError={e => {
+              if (defaultImage) {
+                e.currentTarget.srcset = defaultImage
+                e.currentTarget.src = defaultImage
+                return
+              }
+              setHasError(true)
+            }}
             width={10000}
             height={10000}
             loading="eager"

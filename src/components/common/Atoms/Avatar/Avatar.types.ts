@@ -8,4 +8,5 @@ export type AvatarProps = {
   href?: string
   justClickable?: boolean
   prefetch?: boolean
+  defaultImage?: string
 }

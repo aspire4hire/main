@@ -120,6 +120,7 @@ export const CompanyJobPost = ({
             src={job.company.logo_url}
             name={job.company.name}
             size={AvatarSizeEnum.XS}
+            defaultImage="/assets/company_default.png"
             // href={ROUTES.COMPANY_DETAILS_JOOB_SEEKER({ id: job.company.id })}
             justClickable
           />
