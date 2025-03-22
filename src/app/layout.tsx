@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://app.a4hskillslab.ca/assets/logo_4h.png',
+        url: 'https://app.a4hskillslab.ca/assets/a4h-logo-meta-image.png',
         width: 1200,
         height: 630,
         alt: 'Aspire for Higher'
