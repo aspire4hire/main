@@ -14,7 +14,11 @@ import React from 'react'
 import { Profile } from '../../types'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants'
-import { CompanyProfileDetails, JobSekeerProfileDetails } from './components'
+import {
+  CompanyProfileDetails,
+  JobSekeerProfileDetails,
+  SkillsLabBanner
+} from './components'
 import { Company } from '@/features/company'
 import { MailIcon } from 'lucide-react'
 
@@ -42,6 +46,7 @@ export const MyProfile = ({
 
   return (
     <>
+      {!profile.is_employer && !isExternalView && <SkillsLabBanner />}
       <div className="flex flex-col items-center">
         <Avatar src={profile.profile_pic} size={AvatarSizeEnum.XL} />
         <Typography variant="h4" className="mb-0 mt-2 font-semibold leading-6">
